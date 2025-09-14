@@ -12,15 +12,18 @@ add_executable(SimUDuck SimUDuck.cpp
         lib/Duck/Dance/DanceNoWay.h
 )
 
-add_executable(runTests
+add_executable(duck-test
         test/DuckTest.cpp
+        lib/Duck/Fly/TriggeredQuackFlyBehavior.h
+        test/TriggeredQuackFlyBehaviorTest.cpp
+        test/Mock/MockFlyBehavior.h
 )
 
-target_link_libraries(runTests PRIVATE GTest::gmock_main)
+target_link_libraries(duck-test PRIVATE GTest::gmock_main)
 
-target_include_directories(runTests PRIVATE ${GTest_INCLUDE_DIRS})
+target_include_directories(duck-test PRIVATE ${GTest_INCLUDE_DIRS})
 
-target_include_directories(runTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(duck-test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 enable_testing()
-add_test(NAME unit_tests COMMAND runTests)
+add_test(NAME unit_tests COMMAND duck-test)

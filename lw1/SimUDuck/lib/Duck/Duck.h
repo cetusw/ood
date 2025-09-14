@@ -2,7 +2,7 @@
 #define DUCK_H
 
 #include "Fly/IFlyBehavior.h"
-#include "Quack/IQuakBehavior.h"
+#include "Quack/IQuackBehavior.h"
 
 #include <cassert>
 #include <iostream>
@@ -70,8 +70,6 @@ private:
     std::unique_ptr<IFlyBehavior> m_flyBehavior;
     std::unique_ptr<IQuackBehavior> m_quackBehavior;
     std::unique_ptr<IDanceBehavior> m_danceBehavior;
-
-    int flightCount = 0;
 };
 
 #endif
