@@ -13,10 +13,11 @@ add_executable(SimUDuck SimUDuck.cpp
 )
 
 add_executable(duck-test
-        test/DuckTest.cpp
         lib/Duck/Fly/TriggeredQuackFlyBehavior.h
         test/TriggeredQuackFlyBehaviorTest.cpp
         test/Mock/MockFlyBehavior.h
+        test/Mock/MockDanceBehavior.h
+        test/DanceBehaviorTest.cpp
 )
 
 target_link_libraries(duck-test PRIVATE GTest::gmock_main)
