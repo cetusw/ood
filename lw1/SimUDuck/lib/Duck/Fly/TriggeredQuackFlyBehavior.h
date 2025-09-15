@@ -31,7 +31,7 @@ public:
             m_quackBehavior->Quack();
         }
 
-        std::cout << "Порядковый номер вылета: " << m_flightCount << std::endl;
+        std::cout << "Flight number: " << m_flightCount << std::endl;
 
         return true;
     }

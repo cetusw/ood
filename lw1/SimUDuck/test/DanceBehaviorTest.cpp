@@ -53,7 +53,7 @@ TEST_F(DuckDanceTest, SetDanceBehaviorChangesBehavior)
     duck.SetDanceBehavior(std::make_unique<DanceNoWay>());
 
     auto newMockDance = std::make_unique<MockDanceBehavior>();
-    MockDanceBehavior* newMockDancePtr = newMockDance.get();
+    const MockDanceBehavior* newMockDancePtr = newMockDance.get();
 
     EXPECT_CALL(*newMockDancePtr, Dance()).Times(Exactly(1));
 
