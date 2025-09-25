@@ -48,18 +48,23 @@ TEST_F(DuckDanceTest, DanceCallsDanceBehavior)
 TEST_F(DuckDanceTest, SetDanceBehaviorChangesBehavior)
 {
     MallardDuck duck;
-    duck.SetFlyBehavior(std::move(mockFly));
-    duck.SetQuackBehavior(std::move(mockQuack));
-    duck.SetDanceBehavior(std::make_unique<DanceNoWay>());
+    auto mockInitialDance = std::make_unique<MockDanceBehavior>();
+    const MockDanceBehavior* initialPtr = mockInitialDance.get();
 
-    auto newMockDance = std::make_unique<MockDanceBehavior>();
-    const MockDanceBehavior* newMockDancePtr = newMockDance.get();
+    duck.SetDanceBehavior(std::move(mockInitialDance));
 
-    EXPECT_CALL(*newMockDancePtr, Dance()).Times(Exactly(1));
-
-    duck.SetDanceBehavior(std::move(newMockDance));
-
+    EXPECT_CALL(*initialPtr, Dance()).Times(Exactly(1));
     duck.Dance();
+
+    auto mockNewDance = std::make_unique<MockDanceBehavior>();
+    const MockDanceBehavior* newPtr = mockNewDance.get();
+
+    duck.SetDanceBehavior(std::move(mockNewDance));
+
+    EXPECT_CALL(*newPtr, Dance()).Times(Exactly(1));
+    duck.Dance();
+
+    // TODO: проверить два раза +
 }
 
 TEST_F(DuckDanceTest, DanceCalledMultipleTimes)
