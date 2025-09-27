@@ -25,7 +25,7 @@ func (d *CommandDispatcher) Register(name string, fn CommandFunc) {
 func (d *CommandDispatcher) Execute(picture *shapes.Picture, commandName string, args []string) error {
 	cmd, exists := d.commands[strings.ToLower(commandName)]
 	if !exists {
-		return fmt.Errorf("unknown command: %s", commandName)
+		return fmt.Errorf("неизвестная команда: %s", commandName)
 	}
 	return cmd(picture, args)
 }

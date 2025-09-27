@@ -10,7 +10,7 @@ import (
 
 func AddShapeCommand(picture *shapes.Picture, args []string) error {
 	if len(args) < 4 {
-		return fmt.Errorf("lack of arguments for AddShape. Expected: <id>, <color>, <type>, <params>")
+		return fmt.Errorf("недостаточно аргументов для AddShape. Ожидалось: <id>, <color>, <type>, <params>")
 	}
 
 	id := args[0]
