@@ -29,6 +29,13 @@ func (s *LineStrategy) Draw(canvas Canvas, id string, color string) string {
 	)
 }
 
+func (s *LineStrategy) MoveShape(vector model.Point) {
+	for vertex := range s.Vertices {
+		s.Vertices[vertex].X = s.Vertices[vertex].X + vector.X
+		s.Vertices[vertex].Y = s.Vertices[vertex].Y + vector.Y
+	}
+}
+
 func (s *LineStrategy) GetShapeInfo() string {
 	return fmt.Sprintf(
 		"%s %.2f %.2f %.2f %.2f",

@@ -29,6 +29,11 @@ func (s *CircleStrategy) Draw(canvas Canvas, id string, color string) string {
 	)
 }
 
+func (s *CircleStrategy) MoveShape(vector model.Point) {
+	s.Center.X = s.Center.X + vector.X
+	s.Center.Y = s.Center.Y + vector.Y
+}
+
 func (s *CircleStrategy) GetShapeInfo() string {
 	return fmt.Sprintf(
 		"%s %.2f %.2f %.2f",

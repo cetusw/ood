@@ -13,6 +13,7 @@ import (
 func main() {
 	d := dispatcher.NewDispatcher()
 	d.Register("AddShape", commands.AddShapeCommand)
+	d.Register("MoveShape", commands.MoveShapeCommand)
 	d.Register("List", commands.ListCommand)
 	picture := shapes.NewPicture()
 	scanner := bufio.NewScanner(os.Stdin)

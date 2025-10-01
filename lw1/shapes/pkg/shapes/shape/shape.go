@@ -14,6 +14,10 @@ func NewShape(strategy Strategy, id string, color string) *Shape {
 	}
 }
 
+func (s *Shape) GetStrategy() Strategy {
+	return s.Strategy
+}
+
 func (s *Shape) SetStrategy(strategy Strategy) {
 	s.Strategy = strategy
 }

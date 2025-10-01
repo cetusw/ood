@@ -37,6 +37,11 @@ func (s *TextStrategy) Draw(canvas Canvas, id string, color string) string {
 	)
 }
 
+func (s *TextStrategy) MoveShape(vector model.Point) {
+	s.topLeftPoint.X = s.topLeftPoint.X + vector.X
+	s.topLeftPoint.Y = s.topLeftPoint.Y + vector.Y
+}
+
 func (s *TextStrategy) GetShapeInfo() string {
 	return fmt.Sprintf(
 		"%s %.2f %.2f %.2f %s",

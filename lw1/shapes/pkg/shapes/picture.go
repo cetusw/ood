@@ -2,6 +2,7 @@ package shapes
 
 import (
 	"fmt"
+	"shapes/pkg/shapes/model"
 	"shapes/pkg/shapes/shape"
 )
 
@@ -21,6 +22,14 @@ func (p *Picture) AddShape(shape *shape.Shape) error {
 	}
 	p.shapes = append(p.shapes, shape)
 	return nil
+}
+
+func (p *Picture) MoveShape(id string, vector model.Point) {
+	for _, s := range p.shapes {
+		if s.Id == id {
+			s.Strategy.MoveShape(vector)
+		}
+	}
 }
 
 func (p *Picture) ListShapes() {
