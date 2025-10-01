@@ -9,8 +9,8 @@ class MallardDuck : public Duck
 public:
     MallardDuck()
         : Duck(Behaviors::makeFlyWithWings(),
-               std::function(Behaviors::quackBehavior),
-               std::function(Behaviors::danceWaltz))
+               Behaviors::quackBehavior,
+               Behaviors::danceWaltz)
     {
     }
 

@@ -5,6 +5,7 @@
 
 namespace Behaviors
 {
+    // TODO: вынести в тип
     inline const std::function<void()> &quackBehavior()
     {
         static const std::function behavior = [] { std::cout << "Quack" << std::endl; };
@@ -43,7 +44,7 @@ namespace Behaviors
 
     inline auto makeFlyWithWings()
     {
-        return [flightsCount = 0]() mutable // TODO: что такое?
+        return [flightsCount = 0]() mutable
         {
             flightsCount++;
             std::cout << "I'm flying with wings!! Flight number: " << flightsCount << std::endl;
