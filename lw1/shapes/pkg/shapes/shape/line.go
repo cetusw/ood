@@ -16,17 +16,10 @@ func NewLineStrategy(vertices [2]model.Point) *LineStrategy {
 	}
 }
 
-func (s *LineStrategy) Draw(canvas Canvas, id string, color string) string {
-	return fmt.Sprintf(
-		"%s drawn: id: <%s>, color <%s>, start <%.2f, %.2f>, end <%.2f, %.2f>",
-		common.Line,
-		id,
-		color,
-		s.Vertices[0].X,
-		s.Vertices[0].Y,
-		s.Vertices[1].X,
-		s.Vertices[1].Y,
-	)
+func (s *LineStrategy) Draw(canvas Canvas, color string) {
+	canvas.SetColor(color)
+	canvas.MoveTo(s.Vertices[0])
+	canvas.LineTo(s.Vertices[1])
 }
 
 func (s *LineStrategy) MoveShape(vector model.Point) {

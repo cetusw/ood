@@ -24,16 +24,22 @@ func NewRectangleStrategy(
 	}
 }
 
-func (s *RectangleStrategy) Draw(canvas Canvas, id string, color string) string {
-	return fmt.Sprintf(
-		"rectangle drawn: id: <%s>, color <%s>, topLeftPoint <%.2f, %.2f>, width <%.2f>, height <%.2f>",
-		id,
-		color,
-		s.topLeftPoint.X,
-		s.topLeftPoint.Y,
-		s.width,
-		s.height,
-	)
+func (s *RectangleStrategy) Draw(canvas Canvas, color string) {
+	canvas.SetColor(color)
+	canvas.MoveTo(s.topLeftPoint)
+	canvas.LineTo(common.MovePoint(s.topLeftPoint, model.Point{
+		X: s.width,
+		Y: 0,
+	}))
+	canvas.LineTo(common.MovePoint(s.topLeftPoint, model.Point{
+		X: s.width,
+		Y: -s.height,
+	}))
+	canvas.LineTo(common.MovePoint(s.topLeftPoint, model.Point{
+		X: 0,
+		Y: -s.height,
+	}))
+	canvas.LineTo(s.topLeftPoint)
 }
 
 func (s *RectangleStrategy) MoveShape(vector model.Point) {

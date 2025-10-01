@@ -37,7 +37,3 @@ func (s *Shape) SetId(id string) {
 func (s *Shape) SetColor(color string) {
 	s.color = color
 }
-
-func (s *Shape) Draw(canvas Canvas) string {
-	return s.strategy.Draw(canvas, s.id, s.color)
-}

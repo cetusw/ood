@@ -8,10 +8,14 @@ import (
 
 type Picture struct {
 	shapes []*shape.Shape
+	canvas shape.Canvas
 }
 
 func NewPicture() *Picture {
-	return &Picture{shapes: []*shape.Shape{}}
+	return &Picture{
+		shapes: []*shape.Shape{},
+		canvas: shape.NewCanvas(800, 800),
+	}
 }
 
 func (p *Picture) AddShape(shape *shape.Shape) error {
@@ -72,4 +76,16 @@ func (p *Picture) ChangeShape(id string, newStrategy shape.Strategy) {
 			s.SetStrategy(newStrategy)
 		}
 	}
+}
+
+func (p *Picture) DrawShape(id string, canvas shape.Canvas) {
+	for _, s := range p.shapes {
+		if s.GetId() == id {
+			s.GetStrategy().Draw(canvas, s.GetColor())
+		}
+	}
+}
+
+func (p *Picture) GetCanvas() shape.Canvas {
+	return p.canvas
 }

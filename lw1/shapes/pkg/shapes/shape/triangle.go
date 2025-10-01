@@ -14,19 +14,12 @@ func NewTriangleStrategy(vertices [3]model.Point) *TriangleStrategy {
 	return &TriangleStrategy{Vertices: vertices}
 }
 
-func (s *TriangleStrategy) Draw(canvas Canvas, id string, color string) string {
-	return fmt.Sprintf(
-		"%s drawn: id: <%s>, color <%s>, vertex1 <%.2f, %.2f>, vertex2 <%.2f, %.2f>, vertex3 <%.2f, %.2f>",
-		common.Triangle,
-		id,
-		color,
-		s.Vertices[0].X,
-		s.Vertices[0].Y,
-		s.Vertices[1].X,
-		s.Vertices[1].Y,
-		s.Vertices[2].X,
-		s.Vertices[2].Y,
-	)
+func (s *TriangleStrategy) Draw(canvas Canvas, color string) {
+	canvas.SetColor(color)
+	canvas.MoveTo(s.Vertices[0])
+	canvas.LineTo(s.Vertices[1])
+	canvas.LineTo(s.Vertices[2])
+	canvas.LineTo(s.Vertices[0])
 }
 
 func (s *TriangleStrategy) MoveShape(vector model.Point) {

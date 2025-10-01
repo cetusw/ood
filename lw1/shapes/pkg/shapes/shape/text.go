@@ -8,8 +8,8 @@ import (
 
 type TextStrategy struct {
 	topLeftPoint model.Point
-	Size         float64
-	Content      string
+	fontSize     float64
+	text         string
 }
 
 func NewTextStrategy(
@@ -19,22 +19,15 @@ func NewTextStrategy(
 ) *TextStrategy {
 	return &TextStrategy{
 		topLeftPoint: topLeftPoint,
-		Size:         size,
-		Content:      content,
+		fontSize:     size,
+		text:         content,
 	}
 }
 
-func (s *TextStrategy) Draw(canvas Canvas, id string, color string) string {
-	return fmt.Sprintf(
-		"%s drawn: id: <%s>, color <%s>, topLeftPoint <%.2f, %.2f>, size <%.2f>, text <%s>",
-		common.Text,
-		id,
-		color,
-		s.topLeftPoint.X,
-		s.topLeftPoint.Y,
-		s.Size,
-		s.Content,
-	)
+func (s *TextStrategy) Draw(canvas Canvas, color string) {
+	canvas.SetColor(color)
+	canvas.MoveTo(s.topLeftPoint)
+	canvas.DrawText(s.topLeftPoint, s.fontSize, s.text)
 }
 
 func (s *TextStrategy) MoveShape(vector model.Point) {
@@ -48,7 +41,7 @@ func (s *TextStrategy) GetShapeInfo() string {
 		common.Text,
 		s.topLeftPoint.X,
 		s.topLeftPoint.Y,
-		s.Size,
-		s.Content,
+		s.fontSize,
+		s.text,
 	)
 }

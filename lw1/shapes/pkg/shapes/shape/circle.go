@@ -8,25 +8,22 @@ import (
 
 type CircleStrategy struct {
 	Center model.Point
-	Radius float64
+	Radius model.Radius
 }
 
 func NewCircleStrategy(center model.Point, radius float64) *CircleStrategy {
 	return &CircleStrategy{
 		Center: center,
-		Radius: radius,
+		Radius: model.Radius{
+			X: radius,
+			Y: radius,
+		},
 	}
 }
 
-func (s *CircleStrategy) Draw(canvas Canvas, id string, color string) string {
-	return fmt.Sprintf(
-		"circle drawn: id: <%s>, color <%s>, Center <%.2f, %.2f>, Radius <%.2f>",
-		id,
-		color,
-		s.Center.X,
-		s.Center.Y,
-		s.Radius,
-	)
+func (s *CircleStrategy) Draw(canvas Canvas, color string) {
+	canvas.SetColor(color)
+	canvas.DrawEllipse(s.Center, s.Radius)
 }
 
 func (s *CircleStrategy) MoveShape(vector model.Point) {
