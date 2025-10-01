@@ -38,6 +38,14 @@ func (p *Picture) MovePicture(vector model.Point) {
 	}
 }
 
+func (p *Picture) DeleteShape(id string) {
+	for i := len(p.shapes) - 1; i >= 0; i-- {
+		if p.shapes[i].Id == id {
+			p.shapes = append(p.shapes[:i], p.shapes[i+1:]...)
+		}
+	}
+}
+
 func (p *Picture) ListShapes() {
 	for i, s := range p.shapes {
 		fmt.Println(fmt.Sprintf("%d %s %s %s", i, s.Id, s.Color, s.Strategy.GetShapeInfo()))
