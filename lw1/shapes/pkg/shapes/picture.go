@@ -16,7 +16,7 @@ func NewPicture() *Picture {
 
 func (p *Picture) AddShape(shape *shape.Shape) error {
 	for _, s := range p.shapes {
-		if s.Id == shape.Id {
+		if s.GetId() == shape.GetId() {
 			return fmt.Errorf("фигура с таким названием уже существует")
 		}
 	}
@@ -26,21 +26,21 @@ func (p *Picture) AddShape(shape *shape.Shape) error {
 
 func (p *Picture) MoveShape(id string, vector model.Point) {
 	for _, s := range p.shapes {
-		if s.Id == id {
-			s.Strategy.MoveShape(vector)
+		if s.GetId() == id {
+			s.GetStrategy().MoveShape(vector)
 		}
 	}
 }
 
 func (p *Picture) MovePicture(vector model.Point) {
 	for _, s := range p.shapes {
-		s.Strategy.MoveShape(vector)
+		s.GetStrategy().MoveShape(vector)
 	}
 }
 
 func (p *Picture) DeleteShape(id string) {
 	for i := len(p.shapes) - 1; i >= 0; i-- {
-		if p.shapes[i].Id == id {
+		if p.shapes[i].GetId() == id {
 			p.shapes = append(p.shapes[:i], p.shapes[i+1:]...)
 		}
 	}
@@ -48,6 +48,20 @@ func (p *Picture) DeleteShape(id string) {
 
 func (p *Picture) ListShapes() {
 	for i, s := range p.shapes {
-		fmt.Println(fmt.Sprintf("%d %s %s %s", i, s.Id, s.Color, s.Strategy.GetShapeInfo()))
+		fmt.Println(fmt.Sprintf(
+			"%d %s %s %s",
+			i,
+			s.GetId(),
+			s.GetColor(),
+			s.GetStrategy().GetShapeInfo(),
+		))
+	}
+}
+
+func (p *Picture) ChangeColor(id string, color string) {
+	for _, s := range p.shapes {
+		if s.GetId() == id {
+			s.SetColor(color)
+		}
 	}
 }
