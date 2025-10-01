@@ -45,4 +45,5 @@ func registerCommands(d *dispatcher.CommandDispatcher) {
 	d.Register("ChangeColor", commands.ChangeColorCommand)
 	d.Register("ChangeShape", commands.ChangeShapeCommand)
 	d.Register("DrawShape", commands.DrawShapeCommand)
+	d.Register("DrawPicture", commands.DrawPictureCommand)
 }

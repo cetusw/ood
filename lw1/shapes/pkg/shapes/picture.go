@@ -86,6 +86,12 @@ func (p *Picture) DrawShape(id string, canvas shape.Canvas) {
 	}
 }
 
+func (p *Picture) DrawPicture(canvas shape.Canvas) {
+	for _, s := range p.shapes {
+		s.GetStrategy().Draw(canvas, s.GetColor())
+	}
+}
+
 func (p *Picture) GetCanvas() shape.Canvas {
 	return p.canvas
 }
