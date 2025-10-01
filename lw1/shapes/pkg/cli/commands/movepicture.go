@@ -7,14 +7,13 @@ import (
 	"strconv"
 )
 
-func MoveShapeCommand(picture *shapes.Picture, args []string) error {
-	if len(args) < 3 {
-		return fmt.Errorf("недостаточно аргументов для MoveShape. Ожидалось: <id> <dx> <dy>")
+func MovePictureCommand(picture *shapes.Picture, args []string) error {
+	if len(args) < 2 {
+		return fmt.Errorf("недостаточно аргументов для MovePicture. Ожидалось: <dx> <dy>")
 	}
 
-	id := args[0]
-	dxString := args[1]
-	dyString := args[2]
+	dxString := args[0]
+	dyString := args[1]
 
 	dx, err := strconv.ParseFloat(dxString, 64)
 	if err != nil {
@@ -26,7 +25,7 @@ func MoveShapeCommand(picture *shapes.Picture, args []string) error {
 	}
 
 	vector := model.Point{X: dx, Y: dy}
-	picture.MoveShape(id, vector)
+	picture.MovePicture(vector)
 
 	return nil
 }

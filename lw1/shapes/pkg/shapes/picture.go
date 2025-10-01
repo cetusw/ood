@@ -32,6 +32,12 @@ func (p *Picture) MoveShape(id string, vector model.Point) {
 	}
 }
 
+func (p *Picture) MovePicture(vector model.Point) {
+	for _, s := range p.shapes {
+		s.Strategy.MoveShape(vector)
+	}
+}
+
 func (p *Picture) ListShapes() {
 	for i, s := range p.shapes {
 		fmt.Println(fmt.Sprintf("%d %s %s %s", i, s.Id, s.Color, s.Strategy.GetShapeInfo()))

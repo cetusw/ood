@@ -12,9 +12,7 @@ import (
 
 func main() {
 	d := dispatcher.NewDispatcher()
-	d.Register("AddShape", commands.AddShapeCommand)
-	d.Register("MoveShape", commands.MoveShapeCommand)
-	d.Register("List", commands.ListCommand)
+	registerCommands(d)
 	picture := shapes.NewPicture()
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Введите команду (например, AddShape circ #febb38 circle 100 200 25):")
@@ -36,4 +34,11 @@ func main() {
 
 		fmt.Println("\nВведите следующую команду:")
 	}
+}
+
+func registerCommands(d *dispatcher.CommandDispatcher) {
+	d.Register("AddShape", commands.AddShapeCommand)
+	d.Register("MoveShape", commands.MoveShapeCommand)
+	d.Register("MovePicture", commands.MovePictureCommand)
+	d.Register("List", commands.ListCommand)
 }
