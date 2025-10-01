@@ -65,3 +65,11 @@ func (p *Picture) ChangeColor(id string, color string) {
 		}
 	}
 }
+
+func (p *Picture) ChangeShape(id string, newStrategy shape.Strategy) {
+	for _, s := range p.shapes {
+		if s.GetId() == id {
+			s.SetStrategy(newStrategy)
+		}
+	}
+}
