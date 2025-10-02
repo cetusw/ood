@@ -88,18 +88,9 @@ func (c *TDWCanvas) DrawEllipse(center model.Point, radius model.Radius) {
 }
 
 func (c *TDWCanvas) DrawText(topLeftPoint model.Point, fontSize float64, text string) {
-	// Start with a new, empty font family object.
 	face := tdw.NewFontFamily("text-font")
-
-	// Attempt 1: Load "Arial" system font. This is the preferred font.
 	face.LoadSystemFont("Arial", tdw.FontRegular)
-
-	// Attempt 2: If Arial failed to load, try a generic "Sans" font.
-	// The original flaw was re-assigning 'face' here, which we avoid.
-
-	// Now face is guaranteed to have at least one font (face.Len() > 0).
 	font := face.Face(fontSize, c.currentColor, tdw.FontRegular, tdw.FontNormal)
-
 	c.context.DrawText(topLeftPoint.X, topLeftPoint.Y, tdw.NewTextLine(font, text, tdw.Left))
 }
 
