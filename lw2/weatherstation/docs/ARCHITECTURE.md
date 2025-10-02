@@ -40,11 +40,16 @@ classDiagram
         +MeasurementsChanged()
     }
 
+    class Stats {
+        -min float64
+        -max float64
+        -acc float64
+    }
 
     observable ..|> Observable
     Display ..|> Observer
     StatsDisplay ..|> Observer
-
+    StatsDisplay *-- Stats
     WeatherData *-- Observable
-    observable *--  Observer
+    observable *-- Observer
 ```
