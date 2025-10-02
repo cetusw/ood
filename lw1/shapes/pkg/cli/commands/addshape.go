@@ -10,10 +10,10 @@ import (
 
 func AddShapeCommand(picture *shapes.Picture, args []string) error {
 	if len(args) < 4 {
-		return fmt.Errorf("недостаточно аргументов для AddShape. Ожидалось: <id>, <color>, <type>, <params>")
+		return fmt.Errorf("недостаточно аргументов для AddShape. Ожидалось: <shapeID>, <color>, <type>, <params>")
 	}
 
-	id := args[0]
+	shapeID := args[0]
 	color := args[1]
 	shapeString := args[2]
 
@@ -21,7 +21,7 @@ func AddShapeCommand(picture *shapes.Picture, args []string) error {
 	if err != nil {
 		return err
 	}
-	s := shape.NewShape(strategy, id, color)
+	s := shape.NewShape(strategy, shapeID, color)
 	err = picture.AddShape(s)
 	if err != nil {
 		return err

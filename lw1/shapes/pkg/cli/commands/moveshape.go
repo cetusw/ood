@@ -9,10 +9,10 @@ import (
 
 func MoveShapeCommand(picture *shapes.Picture, args []string) error {
 	if len(args) < 3 {
-		return fmt.Errorf("недостаточно аргументов для MoveShape. Ожидалось: <id> <dx> <dy>")
+		return fmt.Errorf("недостаточно аргументов для MoveShape. Ожидалось: <shapeID> <dx> <dy>")
 	}
 
-	id := args[0]
+	shapeID := args[0]
 	dxString := args[1]
 	dyString := args[2]
 
@@ -26,7 +26,7 @@ func MoveShapeCommand(picture *shapes.Picture, args []string) error {
 	}
 
 	vector := model.Point{X: dx, Y: dy}
-	picture.MoveShape(id, vector)
+	picture.MoveShape(shapeID, vector)
 
 	return nil
 }

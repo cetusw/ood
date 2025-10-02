@@ -7,12 +7,12 @@ import (
 
 func DeleteShapeCommand(picture *shapes.Picture, args []string) error {
 	if len(args) < 1 {
-		return fmt.Errorf("недостаточно аргументов для DeleteShape. Ожидалось: <id>")
+		return fmt.Errorf("недостаточно аргументов для DeleteShape. Ожидалось: <shapeID>")
 	}
 
-	id := args[0]
+	shapeID := args[0]
 
-	picture.DeleteShape(id)
+	picture.DeleteShape(shapeID)
 
 	return nil
 }

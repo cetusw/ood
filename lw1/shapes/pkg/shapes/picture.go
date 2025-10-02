@@ -20,7 +20,7 @@ func NewPicture() *Picture {
 
 func (p *Picture) AddShape(shape *shape.Shape) error {
 	for _, s := range p.shapes {
-		if s.GetId() == shape.GetId() {
+		if s.GetID() == shape.GetID() {
 			return fmt.Errorf("фигура с таким названием уже существует")
 		}
 	}
@@ -28,9 +28,9 @@ func (p *Picture) AddShape(shape *shape.Shape) error {
 	return nil
 }
 
-func (p *Picture) MoveShape(id string, vector model.Point) {
+func (p *Picture) MoveShape(shapeID string, vector model.Point) {
 	for _, s := range p.shapes {
-		if s.GetId() == id {
+		if s.GetID() == shapeID {
 			s.GetStrategy().MoveShape(vector)
 		}
 	}
@@ -42,9 +42,9 @@ func (p *Picture) MovePicture(vector model.Point) {
 	}
 }
 
-func (p *Picture) DeleteShape(id string) {
+func (p *Picture) DeleteShape(shapeID string) {
 	for i := len(p.shapes) - 1; i >= 0; i-- {
-		if p.shapes[i].GetId() == id {
+		if p.shapes[i].GetID() == shapeID {
 			p.shapes = append(p.shapes[:i], p.shapes[i+1:]...)
 		}
 	}
@@ -55,32 +55,32 @@ func (p *Picture) ListShapes() {
 		fmt.Println(fmt.Sprintf(
 			"%d %s %s %s",
 			i,
-			s.GetId(),
+			s.GetID(),
 			s.GetColor(),
 			s.GetStrategy().GetShapeInfo(),
 		))
 	}
 }
 
-func (p *Picture) ChangeColor(id string, color string) {
+func (p *Picture) ChangeColor(shapeID string, color string) {
 	for _, s := range p.shapes {
-		if s.GetId() == id {
+		if s.GetID() == shapeID {
 			s.SetColor(color)
 		}
 	}
 }
 
-func (p *Picture) ChangeShape(id string, newStrategy shape.Strategy) {
+func (p *Picture) ChangeShape(shapeID string, newStrategy shape.Strategy) {
 	for _, s := range p.shapes {
-		if s.GetId() == id {
+		if s.GetID() == shapeID {
 			s.SetStrategy(newStrategy)
 		}
 	}
 }
 
-func (p *Picture) DrawShape(id string, canvas shape.Canvas) {
+func (p *Picture) DrawShape(shapeID string, canvas shape.Canvas) {
 	for _, s := range p.shapes {
-		if s.GetId() == id {
+		if s.GetID() == shapeID {
 			s.GetStrategy().Draw(canvas, s.GetColor())
 		}
 	}
@@ -94,4 +94,8 @@ func (p *Picture) DrawPicture(canvas shape.Canvas) {
 
 func (p *Picture) GetCanvas() shape.Canvas {
 	return p.canvas
+}
+
+func (p *Picture) GetShapes() []*shape.Shape {
+	return p.shapes
 }

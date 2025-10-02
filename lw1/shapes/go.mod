@@ -2,6 +2,8 @@ module shapes
 
 go 1.25
 
+require github.com/tdewolff/canvas v0.0.0-20251001161249-3bdd22b825c9
+
 require (
 	codeberg.org/go-latex/latex v0.1.0 // indirect
 	codeberg.org/go-pdf/fpdf v0.11.1 // indirect
@@ -20,7 +22,6 @@ require (
 	github.com/kolesa-team/go-webp v1.0.5 // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/srwiley/scanx v0.0.0-20190309010443-e94503791388 // indirect
-	github.com/tdewolff/canvas v0.0.0-20251001161249-3bdd22b825c9 // indirect
 	github.com/tdewolff/font v0.0.0-20250430140153-b654fd8acba3 // indirect
 	github.com/tdewolff/minify/v2 v2.23.4 // indirect
 	github.com/tdewolff/parse/v2 v2.8.0 // indirect
