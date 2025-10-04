@@ -11,8 +11,8 @@ func main() {
 
 	var display observers.Display
 	statsDisplay := observers.NewStatsDisplay()
-	wd.RegisterObserver(&display)
-	wd.RegisterObserver(statsDisplay)
+	wd.RegisterObserver(&display, 1)
+	wd.RegisterObserver(statsDisplay, 0)
 
 	wd.SetMeasurements(model.WeatherInfo{
 		Temperature: 3,
