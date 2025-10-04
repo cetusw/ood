@@ -6,14 +6,16 @@ import (
 
 type WeatherData struct {
 	Observable
+	sourceID    string
 	temperature float64
 	humidity    float64
 	pressure    float64
 }
 
-func NewWeatherData() *WeatherData {
+func NewWeatherData(sourceID string) *WeatherData {
 	return &WeatherData{
 		Observable:  NewObservable(),
+		sourceID:    sourceID,
 		temperature: 0.0,
 		humidity:    0.0,
 		pressure:    760.0,
@@ -21,14 +23,14 @@ func NewWeatherData() *WeatherData {
 }
 
 func (wd *WeatherData) MeasurementsChanged() {
-	wd.NotifyObservers(wd.getCurrentData())
+	wd.NotifyObservers(wd.sourceID, wd.getCurrentData())
 }
 
 func (wd *WeatherData) SetMeasurements(measurements model.WeatherInfo) {
 	wd.humidity = measurements.Humidity
 	wd.temperature = measurements.Temperature
 	wd.pressure = measurements.Pressure
-	wd.NotifyObservers(wd.getCurrentData())
+	wd.NotifyObservers(wd.sourceID, wd.getCurrentData())
 }
 
 func (wd *WeatherData) getCurrentData() model.WeatherInfo {

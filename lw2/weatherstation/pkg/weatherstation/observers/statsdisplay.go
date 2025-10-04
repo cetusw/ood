@@ -21,12 +21,13 @@ func NewStatsDisplay() *StatsDisplay {
 	}
 }
 
-func (s *StatsDisplay) Update(data model.WeatherInfo) {
+func (s *StatsDisplay) Update(sourceID string, data model.WeatherInfo) {
 	s.temperatureStats.Update(data.Temperature)
 	s.humidityStats.Update(data.Humidity)
 	s.pressureStats.Update(data.Pressure)
 	s.countAcc++
 
+	fmt.Printf("=== Stats for [%s] ===\n", sourceID)
 	s.temperatureStats.Print("Temperature", s.countAcc)
 	s.humidityStats.Print("Humidity", s.countAcc)
 	s.pressureStats.Print("Pressure", s.countAcc)

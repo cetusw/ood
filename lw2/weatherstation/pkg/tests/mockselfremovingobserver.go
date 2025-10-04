@@ -10,7 +10,7 @@ type SelfRemovingObserver struct {
 	called     bool
 }
 
-func (o *SelfRemovingObserver) Update(data model.WeatherInfo) {
+func (o *SelfRemovingObserver) Update(_ string, _ model.WeatherInfo) {
 	if !o.called {
 		o.observable.RemoveObserver(o)
 		o.called = true

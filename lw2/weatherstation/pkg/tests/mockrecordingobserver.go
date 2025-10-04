@@ -7,6 +7,6 @@ type RecordingObserver struct {
 	log *[]string
 }
 
-func (r *RecordingObserver) Update(data model.WeatherInfo) {
+func (r *RecordingObserver) Update(_ string, _ model.WeatherInfo) {
 	*r.log = append(*r.log, r.id)
 }

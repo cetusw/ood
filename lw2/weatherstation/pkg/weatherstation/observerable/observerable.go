@@ -8,7 +8,7 @@ import (
 
 type Observable interface {
 	RegisterObserver(observer observers.Observer, priority int)
-	NotifyObservers(data model.WeatherInfo)
+	NotifyObservers(sourceID string, data model.WeatherInfo)
 	RemoveObserver(observer observers.Observer)
 }
 
@@ -36,12 +36,12 @@ func (o *observable) RegisterObserver(observer observers.Observer, priority int)
 	o.sortObservers()
 }
 
-func (o *observable) NotifyObservers(data model.WeatherInfo) {
+func (o *observable) NotifyObservers(sourceID string, data model.WeatherInfo) {
 	copyList := make([]observerEntry, len(o.sortedObservers))
 	copy(copyList, o.sortedObservers)
 
 	for _, entry := range copyList {
-		entry.observer.Update(data)
+		entry.observer.Update(sourceID, data)
 	}
 }
 

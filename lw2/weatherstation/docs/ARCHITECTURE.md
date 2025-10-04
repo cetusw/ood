@@ -10,9 +10,9 @@ classDiagram
     }
 
     class StatsDisplay {
-        -minTemperature: float64
-        -maxTemperature: float64
-        -accTemperature: float64
+        -temperature: Stats
+        -humidity: Stats
+        -pressure: Stats
         -countAcc: uint
         +Update(WeatherInfo)
     }
@@ -44,6 +44,8 @@ classDiagram
         -min float64
         -max float64
         -acc float64
+        +Update()
+        +Print()
     }
 
     observable ..|> Observable

@@ -20,7 +20,7 @@ func TestNotifyObserversPriorityOrder(t *testing.T) {
 	obs.RegisterObserver(medPriority, 5)
 
 	callOrder = []string{}
-	obs.NotifyObservers(model.WeatherInfo{})
+	obs.NotifyObservers("station1", model.WeatherInfo{})
 
 	expected := []string{"high", "med", "low"}
 
@@ -47,7 +47,7 @@ func TestNotifyObserversSamePriorityOrderStable(t *testing.T) {
 	obs.RegisterObserver(b, 5)
 
 	callOrder = []string{}
-	obs.NotifyObservers(model.WeatherInfo{})
+	obs.NotifyObservers("station1", model.WeatherInfo{})
 
 	if len(callOrder) != 2 {
 		t.Errorf("Expected 2 calls, got %d", len(callOrder))

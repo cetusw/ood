@@ -7,12 +7,14 @@ import (
 )
 
 func main() {
-	wd := observerable.NewWeatherData()
+	wd := observerable.NewWeatherData("station1")
+	wd2 := observerable.NewWeatherData("station2")
 
 	var display observers.Display
 	statsDisplay := observers.NewStatsDisplay()
 	wd.RegisterObserver(&display, 1)
 	wd.RegisterObserver(statsDisplay, 0)
+	wd2.RegisterObserver(statsDisplay, 2)
 
 	wd.SetMeasurements(model.WeatherInfo{
 		Temperature: 3,
@@ -27,7 +29,7 @@ func main() {
 
 	wd.RemoveObserver(statsDisplay)
 
-	wd.SetMeasurements(model.WeatherInfo{
+	wd2.SetMeasurements(model.WeatherInfo{
 		Temperature: 10,
 		Humidity:    0.8,
 		Pressure:    761,

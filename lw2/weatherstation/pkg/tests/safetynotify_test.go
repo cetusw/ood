@@ -12,7 +12,7 @@ func TestNotifyObserversSafeRemovalDuringUpdate(t *testing.T) {
 
 	observer.RegisterObserver(selfRemover, 0)
 
-	observer.NotifyObservers(model.WeatherInfo{
+	observer.NotifyObservers("station1", model.WeatherInfo{
 		Temperature: 20.0,
 		Humidity:    0.5,
 		Pressure:    760.0,
