@@ -63,6 +63,6 @@ direction LR
     Strategy <|.. TextStrategy
 
     Picture o-- Canvas
-    Picture o-- Shape
+    Picture *-- Shape
     Shape *--  Strategy
 ```
