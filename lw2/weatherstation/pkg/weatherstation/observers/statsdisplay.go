@@ -26,6 +26,7 @@ func (s *StatsDisplay) Update(sourceID string, data model.WeatherInfo) {
 	s.humidityStats.Update(data.Humidity)
 	s.pressureStats.Update(data.Pressure)
 	s.countAcc++
+	// TODO: среднее должно считаться по отдельности
 
 	fmt.Printf("=== Stats for [%s] ===\n", sourceID)
 	s.temperatureStats.Print("Temperature", s.countAcc)
@@ -33,3 +34,5 @@ func (s *StatsDisplay) Update(sourceID string, data model.WeatherInfo) {
 	s.pressureStats.Print("Pressure", s.countAcc)
 	fmt.Println("----------------")
 }
+
+// TODO: создать ещё один для in и out

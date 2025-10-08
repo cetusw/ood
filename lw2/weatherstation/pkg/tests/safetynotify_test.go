@@ -6,6 +6,8 @@ import (
 	"weatherstation/pkg/weatherstation/observerable"
 )
 
+// TODO: несколько обсерверов и удалить центрального
+
 func TestNotifyObserversSafeRemovalDuringUpdate(t *testing.T) {
 	observer := observerable.NewObservable()
 	selfRemover := &SelfRemovingObserver{observable: observer}
