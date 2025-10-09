@@ -7,10 +7,10 @@ type Milkshake struct {
 	size model.SizeType
 }
 
-func NewMilkshake(size model.SizeType, describer model.SizeDescriber) *Milkshake {
+func NewMilkshake(size model.SizeType) *Milkshake {
 	return &Milkshake{
 		beverage: beverage{
-			description: "Milkshake" + describer.GetSize(size),
+			description: "Milkshake" + " " + string(size),
 		},
 		size: size,
 	}

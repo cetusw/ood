@@ -1,9 +1,9 @@
 package model
 
-type SizeType int
+type SizeType string
 
 const (
-	Small SizeType = iota
-	Middle
-	Large
+	Small  SizeType = "Small"
+	Middle SizeType = "Middle"
+	Large  SizeType = "Large"
 )

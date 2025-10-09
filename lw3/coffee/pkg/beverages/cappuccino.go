@@ -7,10 +7,10 @@ type Cappuccino struct {
 	portion model.PortionType
 }
 
-func NewCappuccino(portion model.PortionType, describer model.PortionDescriber) *Cappuccino {
+func NewCappuccino(portion model.PortionType) *Cappuccino {
 	c := &Cappuccino{}
 	c.portion = portion
-	c.description = "Cappuccino" + describer.GetDescriptionPrefix(portion)
+	c.description = "Cappuccino" + " " + string(portion)
 	return c
 }
 

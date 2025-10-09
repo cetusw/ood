@@ -1,9 +1,8 @@
 package model
 
-type PortionType int
+type PortionType string
 
 const (
-	Regular PortionType = iota
-	Double
-	Triple
+	Regular PortionType = ""
+	Double              = "Double"
 )

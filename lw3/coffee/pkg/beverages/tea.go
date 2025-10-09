@@ -1,11 +1,17 @@
 package beverages
 
+import "coffee/pkg/model"
+
 type Tea struct {
 	beverage
 }
 
-func NewTea() *Tea {
-	return &Tea{beverage{description: "Tea"}}
+func NewTea(teaType model.TeaType) *Tea {
+	return &Tea{
+		beverage{
+			description: "Tea" + " " + string(teaType),
+		},
+	}
 }
 
 func (t *Tea) GetCost() float64 {

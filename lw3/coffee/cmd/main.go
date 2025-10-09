@@ -45,11 +45,25 @@ func selectSize(reader *bufio.Reader) model.SizeType {
 	}
 }
 
+func selectTeaType(reader *bufio.Reader) model.TeaType {
+	fmt.Println("Choose tea type: 1 - Black, 2 - Green, 3 - Red, 4 - White")
+	choice := readChoice(reader)
+	switch choice {
+	case 1:
+		return model.BlackTea
+	case 2:
+		return model.GreenTea
+	case 3:
+		return model.RedTea
+	case 4:
+		return model.WhiteTea
+	default:
+		return model.BlackTea
+	}
+}
+
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-
-	portionDescriber := model.NewPortionDescriber()
-	sizeDescriber := model.NewSizeDescriber()
 
 	var beverage beverages.Beverage
 
@@ -64,10 +78,10 @@ func main() {
 		switch coffeeChoice {
 		case 1:
 			selectedPortion := selectPortion(reader)
-			beverage = beverages.NewCappuccino(selectedPortion, portionDescriber)
+			beverage = beverages.NewCappuccino(selectedPortion)
 		case 2:
 			selectedPortion := selectPortion(reader)
-			beverage = beverages.NewLatte(selectedPortion, portionDescriber)
+			beverage = beverages.NewLatte(selectedPortion)
 		case 3:
 			beverage = beverages.NewCoffee()
 		default:
@@ -75,9 +89,10 @@ func main() {
 		}
 	case 2:
 		selectedSize := selectSize(reader)
-		beverage = beverages.NewMilkshake(selectedSize, sizeDescriber)
+		beverage = beverages.NewMilkshake(selectedSize)
 	case 3:
-		beverage = beverages.NewTea()
+		selectedTeaType := selectTeaType(reader)
+		beverage = beverages.NewTea(selectedTeaType)
 
 	default:
 		return
