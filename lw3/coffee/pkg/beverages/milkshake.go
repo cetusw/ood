@@ -4,8 +4,7 @@ import "coffee/pkg/model"
 
 type Milkshake struct {
 	beverage
-	size      model.SizeType
-	describer model.SizeDescriber
+	size model.SizeType
 }
 
 func NewMilkshake(size model.SizeType, describer model.SizeDescriber) *Milkshake {
@@ -13,8 +12,7 @@ func NewMilkshake(size model.SizeType, describer model.SizeDescriber) *Milkshake
 		beverage: beverage{
 			description: "Milkshake" + describer.GetSize(size),
 		},
-		size:      size,
-		describer: describer,
+		size: size,
 	}
 }
 
