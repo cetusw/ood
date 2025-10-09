@@ -2,6 +2,8 @@ package condiments
 
 import "coffee/pkg/beverages"
 
+const cinnamonCost = 20
+
 type Cinnamon struct {
 	CondimentDecorator
 }
@@ -15,5 +17,5 @@ func (c *Cinnamon) GetDescription() string {
 }
 
 func (c *Cinnamon) GetCost() float64 {
-	return c.beverage.GetCost() + 20
+	return c.beverage.GetCost() + cinnamonCost
 }

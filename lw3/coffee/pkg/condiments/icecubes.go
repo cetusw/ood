@@ -2,23 +2,20 @@ package condiments
 
 import (
 	"coffee/pkg/beverages"
-	"strconv"
+	"coffee/pkg/model"
+	"fmt"
 )
 
-type IceCubeType int
-
-const (
-	DryIce IceCubeType = iota
-	WaterIce
-)
+const costPerWaterCube = 5
+const costPerDryCube = 10
 
 type IceCubes struct {
 	CondimentDecorator
-	quantity uint
-	iceType  IceCubeType
+	quantity int
+	iceType  model.IceCubeType
 }
 
-func NewIceCubes(beverage beverages.Beverage, quantity uint, iceType IceCubeType) *IceCubes {
+func NewIceCubes(beverage beverages.Beverage, quantity int, iceType model.IceCubeType) *IceCubes {
 	return &IceCubes{
 		CondimentDecorator: CondimentDecorator{beverage: beverage},
 		quantity:           quantity,
@@ -27,17 +24,13 @@ func NewIceCubes(beverage beverages.Beverage, quantity uint, iceType IceCubeType
 }
 
 func (i *IceCubes) GetDescription() string {
-	typeStr := "Water"
-	if i.iceType == DryIce {
-		typeStr = "Dry"
-	}
-	return i.beverage.GetDescription() + ", " + typeStr + " ice cubes x " + strconv.FormatUint(uint64(i.quantity), 10)
+	return fmt.Sprintf("%s %d", i.beverage.GetDescription()+", "+string(i.iceType)+" ice cubes x ", i.quantity)
 }
 
 func (i *IceCubes) GetCost() float64 {
-	costPerCube := 5.0
-	if i.iceType == DryIce {
-		costPerCube = 10.0
+	costPerCube := costPerWaterCube
+	if i.iceType == model.DryIce {
+		costPerCube = costPerDryCube
 	}
-	return i.beverage.GetCost() + (costPerCube * float64(i.quantity))
+	return i.beverage.GetCost() + float64(costPerCube*i.quantity)
 }

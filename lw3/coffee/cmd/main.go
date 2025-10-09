@@ -62,6 +62,19 @@ func selectTeaType(reader *bufio.Reader) model.TeaType {
 	}
 }
 
+func selectLiquorType(reader *bufio.Reader) model.LiquorType {
+	fmt.Println("Choose liquor type: 1 - Walnut, 2 - Chocolate")
+	choice := readChoice(reader)
+	switch choice {
+	case 1:
+		return model.WalnutLiquor
+	case 2:
+		return model.ChocolateLiquor
+	default:
+		return model.WalnutLiquor
+	}
+}
+
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -103,14 +116,25 @@ func main() {
 	}
 
 	for {
-		fmt.Println("1 - Lemon, 2 - Cinnamon, 0 - Checkout")
+		fmt.Println("1 - Cream, 2 - Cinnamon, 3 - Cream, 4 - Chocolate, 5 - Liquor 0 - Checkout")
 		condimentChoice := readChoice(reader)
 
 		switch condimentChoice {
 		case 1:
-			beverage = condiments.NewLemon(beverage, 2)
+			fmt.Println("Type quantity:")
+			quantity := readChoice(reader)
+			beverage = condiments.NewLemon(beverage, quantity)
 		case 2:
 			beverage = condiments.NewCinnamon(beverage)
+		case 3:
+			beverage = condiments.NewCream(beverage)
+		case 4:
+			fmt.Println("Type quantity:")
+			quantity := readChoice(reader)
+			beverage = condiments.NewChocolate(beverage, quantity)
+		case 5:
+			liquorType := selectLiquorType(reader)
+			beverage = condiments.NewLiquor(beverage, liquorType)
 		case 0:
 			fmt.Printf("%s, cost: %.2f\n", beverage.GetDescription(), beverage.GetCost())
 			return

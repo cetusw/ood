@@ -1,20 +1,18 @@
 package condiments
 
-import "coffee/pkg/beverages"
-
-type SyrupType int
-
-const (
-	ChocolateSyrup SyrupType = iota
-	MapleSyrup
+import (
+	"coffee/pkg/beverages"
+	"coffee/pkg/model"
 )
+
+const syrupCost = 15
 
 type Syrup struct {
 	CondimentDecorator
-	syrupType SyrupType
+	syrupType model.SyrupType
 }
 
-func NewSyrup(beverage beverages.Beverage, syrupType SyrupType) *Syrup {
+func NewSyrup(beverage beverages.Beverage, syrupType model.SyrupType) *Syrup {
 	return &Syrup{
 		CondimentDecorator: CondimentDecorator{beverage: beverage},
 		syrupType:          syrupType,
@@ -22,13 +20,9 @@ func NewSyrup(beverage beverages.Beverage, syrupType SyrupType) *Syrup {
 }
 
 func (s *Syrup) GetDescription() string {
-	typeStr := "Chocolate"
-	if s.syrupType == MapleSyrup {
-		typeStr = "Maple"
-	}
-	return s.beverage.GetDescription() + ", " + typeStr + " syrup"
+	return s.beverage.GetDescription() + ", " + string(s.syrupType) + " syrup"
 }
 
 func (s *Syrup) GetCost() float64 {
-	return s.beverage.GetCost() + 15
+	return s.beverage.GetCost() + syrupCost
 }

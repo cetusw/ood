@@ -2,15 +2,17 @@ package condiments
 
 import (
 	"coffee/pkg/beverages"
-	"strconv"
+	"fmt"
 )
+
+const lemonCost = 10
 
 type Lemon struct {
 	CondimentDecorator
-	quantity uint
+	quantity int
 }
 
-func NewLemon(beverage beverages.Beverage, quantity uint) *Lemon {
+func NewLemon(beverage beverages.Beverage, quantity int) *Lemon {
 	if quantity == 0 {
 		quantity = 1
 	}
@@ -21,9 +23,9 @@ func NewLemon(beverage beverages.Beverage, quantity uint) *Lemon {
 }
 
 func (l *Lemon) GetDescription() string {
-	return l.beverage.GetDescription() + ", Lemon x " + strconv.FormatUint(uint64(l.quantity), 10)
+	return fmt.Sprintf("%s %d", l.beverage.GetDescription()+", Lemon x ", l.quantity)
 }
 
 func (l *Lemon) GetCost() float64 {
-	return l.beverage.GetCost() + (10.0 * float64(l.quantity))
+	return l.beverage.GetCost() + (lemonCost * float64(l.quantity))
 }

@@ -2,15 +2,17 @@ package condiments
 
 import (
 	"coffee/pkg/beverages"
-	"strconv"
+	"fmt"
 )
+
+const coconutFlakes = 1
 
 type CoconutFlakes struct {
 	CondimentDecorator
-	mass uint
+	mass int
 }
 
-func NewCoconutFlakes(beverage beverages.Beverage, mass uint) *CoconutFlakes {
+func NewCoconutFlakes(beverage beverages.Beverage, mass int) *CoconutFlakes {
 	return &CoconutFlakes{
 		CondimentDecorator: CondimentDecorator{beverage: beverage},
 		mass:               mass,
@@ -18,9 +20,9 @@ func NewCoconutFlakes(beverage beverages.Beverage, mass uint) *CoconutFlakes {
 }
 
 func (c *CoconutFlakes) GetDescription() string {
-	return c.beverage.GetDescription() + ", Coconut flakes " + strconv.FormatUint(uint64(c.mass), 10) + "g"
+	return fmt.Sprintf("%s %d%s", c.beverage.GetDescription()+", Coconut flakes ", c.mass, "g")
 }
 
 func (c *CoconutFlakes) GetCost() float64 {
-	return c.beverage.GetCost() + (1.0 * float64(c.mass))
+	return c.beverage.GetCost() + float64(coconutFlakes*c.mass)
 }
