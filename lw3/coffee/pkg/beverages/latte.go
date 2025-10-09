@@ -1,15 +1,24 @@
 package beverages
 
+import "coffee/pkg/model"
+
 type Latte struct {
 	Coffee
+	portion model.PortionType
 }
 
-func NewLatte() *Latte {
+func NewLatte(portion model.PortionType, describer model.PortionDescriber) *Latte {
 	l := &Latte{}
-	l.description = "Latte"
+	l.portion = portion
+	l.description = "Latte" + describer.GetDescriptionPrefix(portion)
 	return l
 }
 
 func (l *Latte) GetCost() float64 {
-	return 90
+	switch l.portion {
+	case model.Double:
+		return 130
+	default:
+		return 90
+	}
 }
