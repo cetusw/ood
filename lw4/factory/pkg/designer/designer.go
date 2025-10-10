@@ -5,24 +5,24 @@ import (
 	"fmt"
 	"io"
 
-	"factory/pkg/domain"
-	"factory/pkg/factory"
+	"factory/pkg/draft"
+	"factory/pkg/shapefactory"
 )
 
 type Designer interface {
-	CreateDraft(reader io.Reader) (domain.PictureDraft, error)
+	CreateDraft(reader io.Reader) (draft.Draft, error)
 }
 
 type designer struct {
-	factory factory.ShapeFactory
+	factory shapefactory.ShapeFactory
 }
 
-func NewDesigner(factory factory.ShapeFactory) Designer {
+func NewDesigner(factory shapefactory.ShapeFactory) Designer {
 	return &designer{factory: factory}
 }
 
-func (d *designer) CreateDraft(reader io.Reader) (domain.PictureDraft, error) {
-	draft := domain.PictureDraft{}
+func (d *designer) CreateDraft(reader io.Reader) (draft.Draft, error) {
+	pictureDraft := draft.Draft{}
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -31,9 +31,9 @@ func (d *designer) CreateDraft(reader io.Reader) (domain.PictureDraft, error) {
 		}
 		shape, err := d.factory.CreateShape(line)
 		if err != nil {
-			return domain.PictureDraft{}, fmt.Errorf("line '%s': %w", line, err)
+			return draft.Draft{}, fmt.Errorf("line '%s': %w", line, err)
 		}
-		draft.AddShape(shape)
+		pictureDraft.AddShape(shape)
 	}
-	return draft, scanner.Err()
+	return pictureDraft, scanner.Err()
 }

@@ -1,7 +1,7 @@
 package shapes
 
-import "factory/pkg/domain"
+import "factory/pkg/model"
 
 type baseShape struct {
-	color domain.Color
+	color model.Color
 }

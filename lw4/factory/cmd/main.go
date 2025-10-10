@@ -6,11 +6,11 @@ import (
 
 	"factory/pkg/canvas"
 	"factory/pkg/designer"
-	"factory/pkg/factory"
+	"factory/pkg/shapefactory"
 )
 
 func main() {
-	shapeFactory := factory.NewShapeFactory()
+	shapeFactory := shapefactory.NewShapeFactory()
 	appDesigner := designer.NewDesigner(shapeFactory)
 
 	pngFileCanvas := canvas.NewPngCanvas(800, 600)
