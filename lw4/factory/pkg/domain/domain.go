@@ -4,6 +4,7 @@ type Canvas interface {
 	SetColor(color Color)
 	DrawLine(from, to Point)
 	DrawEllipse(center Point, hRadius, vRadius int)
+	SaveToFile(filename string) error
 }
 
 type Shape interface {

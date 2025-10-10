@@ -1,0 +1,8 @@
+rectangle green 0 0 800 100
+rectangle yellow 250 100 550 300
+triangle red 250 300 550 300 400 450
+rectangle black 450 100 510 220
+rectangle blue 290 160 370 240
+rectangle black 328 160 332 240
+rectangle black 290 198 370 202
+ellipse yellow 700 500 60 60

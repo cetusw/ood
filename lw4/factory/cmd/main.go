@@ -10,19 +10,26 @@ import (
 )
 
 func main() {
-	f := factory.NewShapeFactory()
-	c := canvas.NewCanvas()
-	d := designer.NewDesigner(f)
+	shapeFactory := factory.NewShapeFactory()
+	appDesigner := designer.NewDesigner(shapeFactory)
 
-	fmt.Println("Enter shape descriptions:")
+	pngFileCanvas := canvas.NewPngCanvas(800, 600)
 
-	draft, err := d.CreateDraft(os.Stdin)
+	fmt.Println("Enter shape descriptions (e.g., 'rectangle red 100 100 400 300'). Press Ctrl+D to finish.")
+	draft, err := appDesigner.CreateDraft(os.Stdin)
 	if err != nil {
-		fmt.Printf("Error: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("\n--- Drawing Picture Draft ---")
-	draft.Draw(c)
-	fmt.Println("--- Drawing Finished      ---")
+	draft.Draw(pngFileCanvas)
+
+	outputFile := "picture.png"
+	err = pngFileCanvas.SaveToFile(outputFile)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to save file: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("\n--- PNG file '%s' has been generated successfully. ---\n", outputFile)
 }
