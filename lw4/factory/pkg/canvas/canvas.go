@@ -36,30 +36,30 @@ func NewPngCanvas(width, height float64) *PngCanvas {
 	}
 }
 
-func (s *PngCanvas) GetCanvas() *canvas.Canvas {
-	return s.C
+func (p *PngCanvas) GetCanvas() *canvas.Canvas {
+	return p.C
 }
 
-func (s *PngCanvas) SetColor(c model.Color) {
-	s.Context.SetStrokeColor(parseColor(c))
+func (p *PngCanvas) SetColor(c model.Color) {
+	p.Context.SetStrokeColor(parseColor(c))
 }
 
-func (s *PngCanvas) DrawLine(from model.Point, to model.Point) {
+func (p *PngCanvas) DrawLine(from model.Point, to model.Point) {
 	path := &canvas.Path{}
 	path.MoveTo(from.X, from.Y)
 	path.LineTo(to.X, to.Y)
-	s.Context.DrawPath(0, 0, path)
-	s.Context.Stroke()
+	p.Context.DrawPath(0, 0, path)
+	p.Context.Stroke()
 }
 
-func (s *PngCanvas) DrawEllipse(center model.Point, radius model.Radius) {
+func (p *PngCanvas) DrawEllipse(center model.Point, radius model.Radius) {
 	path := canvas.Ellipse(radius.X*2, radius.Y*2)
-	s.Context.DrawPath(center.X-radius.X, center.Y-radius.Y, path)
-	s.Context.Stroke()
+	p.Context.DrawPath(center.X-radius.X, center.Y-radius.Y, path)
+	p.Context.Stroke()
 }
 
-func (s *PngCanvas) SaveToFile(filename string) error {
-	return renderers.Write(filename, s.C, canvas.DPMM(5.0))
+func (p *PngCanvas) SaveToFile(filename string) error {
+	return renderers.Write(filename, p.C, canvas.DPMM(5.0))
 }
 
 func parseColor(c model.Color) color.RGBA {

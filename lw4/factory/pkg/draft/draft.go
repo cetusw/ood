@@ -9,16 +9,16 @@ type Draft struct {
 	shapes []shapes.Shape
 }
 
-func (p *Draft) AddShape(s shapes.Shape) {
-	p.shapes = append(p.shapes, s)
+func (d *Draft) AddShape(s shapes.Shape) {
+	d.shapes = append(d.shapes, s)
 }
 
-func (p *Draft) Draw(canvas canvas.Canvas) {
-	for _, shape := range p.shapes {
+func (d *Draft) Draw(canvas canvas.Canvas) {
+	for _, shape := range d.shapes {
 		shape.Draw(canvas)
 	}
 }
 
-func (p *Draft) GetShapeCount() int {
-	return len(p.shapes)
+func (d *Draft) GetShapeCount() int {
+	return len(d.shapes)
 }

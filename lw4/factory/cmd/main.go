@@ -15,7 +15,7 @@ func main() {
 
 	pngFileCanvas := canvas.NewPngCanvas(800, 600)
 
-	fmt.Println("Enter shape descriptions (e.g., 'rectangle red 100 100 400 300'). Press Ctrl+D to finish.")
+	fmt.Println("Enter shape descriptions. Press Ctrl+D to finish.")
 	draft, err := appDesigner.CreateDraft(os.Stdin)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
