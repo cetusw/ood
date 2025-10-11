@@ -19,8 +19,8 @@ func (m *MockCanvas) DrawLine(from, to model.Point) {
 	m.calls = append(m.calls, fmt.Sprintf("DrawLine(from: %v, to: %v)", from, to))
 }
 
-func (m *MockCanvas) DrawEllipse(center model.Point, hRadius, vRadius int) {
-	m.calls = append(m.calls, fmt.Sprintf("DrawEllipse(center: %v, h: %d, v: %d)", center, hRadius, vRadius))
+func (m *MockCanvas) DrawEllipse(center model.Point, radius model.Radius) {
+	m.calls = append(m.calls, fmt.Sprintf("DrawEllipse(center: %v, radius.X: %.2f, radius.Y: %.2f)", center, radius.X, radius.Y))
 }
 
 func (m *MockCanvas) SaveToFile(filename string) error {

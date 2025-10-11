@@ -46,13 +46,12 @@ func TestEllipseDraw(t *testing.T) {
 	ellipse := shapes.NewEllipse(
 		model.Green,
 		model.Point{X: 100, Y: 150},
-		30,
-		40,
+		model.Radius{X: 30, Y: 40},
 	)
 
 	ellipse.Draw(mockCanvas)
 
-	expectedLog := "SetColor(green); DrawEllipse(center: {100 150}, h: 30, v: 40)"
+	expectedLog := "SetColor(green); DrawEllipse(center: {100 150}, radius.X: 30.00, radius.Y: 40.00)"
 	if mockCanvas.GetLog() != expectedLog {
 		t.Errorf("Expected canvas calls '%s', but got '%s'", expectedLog, mockCanvas.GetLog())
 	}

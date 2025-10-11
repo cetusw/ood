@@ -4,5 +4,5 @@ type PortionType string
 
 const (
 	Regular PortionType = ""
-	Double              = "Double"
+	Double  PortionType = "Double"
 )

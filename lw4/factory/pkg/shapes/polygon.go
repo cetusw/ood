@@ -10,12 +10,17 @@ import (
 type polygon struct {
 	baseShape
 	center      model.Point
-	radius      int
+	radius      float64
 	vertexCount int
 }
 
-func NewPolygon(color model.Color, center model.Point, radius, vertexCount int) Shape {
-	return &polygon{baseShape: baseShape{color: color}, center: center, radius: radius, vertexCount: vertexCount}
+func NewPolygon(color model.Color, center model.Point, radius float64, vertexCount int) Shape {
+	return &polygon{
+		baseShape:   baseShape{color: color},
+		center:      center,
+		radius:      radius,
+		vertexCount: vertexCount,
+	}
 }
 
 func (p *polygon) Draw(canvas canvas.Canvas) {
@@ -28,8 +33,8 @@ func (p *polygon) Draw(canvas canvas.Canvas) {
 	for i := 0; i < p.vertexCount; i++ {
 		angle := 2.0 * math.Pi * float64(i) / float64(p.vertexCount)
 		points[i] = model.Point{
-			X: p.center.X + int(float64(p.radius)*math.Cos(angle)),
-			Y: p.center.Y + int(float64(p.radius)*math.Sin(angle)),
+			X: p.center.X + p.radius*math.Cos(angle),
+			Y: p.center.Y + p.radius*math.Sin(angle),
 		}
 	}
 	for i := 0; i < p.vertexCount-1; i++ {

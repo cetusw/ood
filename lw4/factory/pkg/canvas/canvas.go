@@ -11,8 +11,8 @@ import (
 
 type Canvas interface {
 	SetColor(color model.Color)
-	DrawLine(from, to model.Point)
-	DrawEllipse(center model.Point, hRadius, vRadius int)
+	DrawLine(from model.Point, to model.Point)
+	DrawEllipse(center model.Point, radius model.Radius)
 	SaveToFile(filename string) error
 }
 
@@ -44,18 +44,17 @@ func (s *PngCanvas) SetColor(c model.Color) {
 	s.Context.SetStrokeColor(parseColor(c))
 }
 
-func (s *PngCanvas) DrawLine(from, to model.Point) {
+func (s *PngCanvas) DrawLine(from model.Point, to model.Point) {
 	path := &canvas.Path{}
-	path.MoveTo(float64(from.X), float64(from.Y))
-	path.LineTo(float64(to.X), float64(to.Y))
+	path.MoveTo(from.X, from.Y)
+	path.LineTo(to.X, to.Y)
 	s.Context.DrawPath(0, 0, path)
 	s.Context.Stroke()
 }
 
-func (s *PngCanvas) DrawEllipse(center model.Point, hRadius, vRadius int) {
-	rx, ry := float64(hRadius), float64(vRadius)
-	path := canvas.Ellipse(rx*2, ry*2)
-	s.Context.DrawPath(float64(center.X)-rx, float64(center.Y)-ry, path)
+func (s *PngCanvas) DrawEllipse(center model.Point, radius model.Radius) {
+	path := canvas.Ellipse(radius.X*2, radius.Y*2)
+	s.Context.DrawPath(center.X-radius.X, center.Y-radius.Y, path)
 	s.Context.Stroke()
 }
 
