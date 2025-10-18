@@ -6,9 +6,10 @@ import (
 )
 
 type Stats struct {
-	min float64
-	max float64
-	acc float64
+	min      float64
+	max      float64
+	acc      float64
+	CountAcc uint
 }
 
 func NewStats() Stats {
@@ -26,6 +27,7 @@ func (s *Stats) Update(value float64) {
 		s.max = value
 	}
 	s.acc += value
+	s.CountAcc++
 }
 
 func (s *Stats) Print(name string, count uint) {
