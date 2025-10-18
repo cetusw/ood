@@ -4,11 +4,11 @@ classDiagram
 
     class Designer {
         <<Interface>>
-        +CreateDraft(io.Reader) (PictureDraft, error)
+        +CreateDraft(io.Reader) (Draft, error)
     }
 
     class designer {
-        +CreateDraft(io.Reader) (PictureDraft, error)
+        +CreateDraft(io.Reader) (Draft, error)
     }
 
     class ShapeFactory {
@@ -67,8 +67,8 @@ classDiagram
 
     ShapeFactory <|.. shapeFactory
 
-    PictureDraft *-- Shape
-    designer ..> PictureDraft
+    Draft *-- Shape
+    designer ..> Draft
 
     Shape <|-- baseShape
     baseShape <|-- rectangle
@@ -77,6 +77,6 @@ classDiagram
     baseShape <|-- polygon
     
     Canvas <|.. PngCanvas
-    PictureDraft *-- Canvas
+    Draft *-- Canvas
     Shape *-- Canvas
 ```

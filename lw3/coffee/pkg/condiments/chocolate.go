@@ -9,11 +9,11 @@ const chocolateCost = 10
 
 type Chocolate struct {
 	CondimentDecorator
-	quantity int
+	quantity int // TODO: uint
 }
 
 func NewChocolate(beverage beverages.Beverage, quantity int) *Chocolate {
-	if quantity < 5 {
+	if quantity > 5 {
 		quantity = 5
 	}
 	return &Chocolate{
