@@ -36,3 +36,12 @@ func (c *deleteItemCommand) Unexecute() {
 	}
 	c.deletedItem = nil
 }
+
+func (c *deleteItemCommand) Destroy() {
+	if c.deletedItem != nil {
+		img, ok := c.deletedItem.(document.Image)
+		if ok {
+			img.Destroy()
+		}
+	}
+}

@@ -1,7 +1,6 @@
 package document
 
 import (
-	"editor/pkg/model"
 	"fmt"
 	"html"
 	"io"
@@ -9,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"editor/pkg/model"
 
 	"github.com/google/uuid"
 )
