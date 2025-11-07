@@ -47,10 +47,6 @@ func (i *image) Destroy() {
 	}
 }
 
-func (i *image) GetItemType() string {
-	return "image"
-}
-
 func (i *image) Resize(size model.Size) {
 	i.size = size
 }

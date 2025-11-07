@@ -5,30 +5,30 @@ import "editor/pkg/document"
 type setTitleCommand struct {
 	AbstractCommand
 	doc      document.Document
-	newTitle string
-	oldTitle string
+	NewTitle string
+	OldTitle string
 }
 
 func NewSetTitleCommand(doc document.Document, newTitle string) Command {
 	return &setTitleCommand{
 		doc:      doc,
-		newTitle: newTitle,
+		NewTitle: newTitle,
 	}
 }
 
 func (c *setTitleCommand) Execute() {
-	c.oldTitle = c.doc.GetTitle()
-	c.doc.SetTitle(c.newTitle)
+	c.OldTitle = c.doc.GetTitle()
+	c.doc.SetTitle(c.NewTitle)
 }
 
 func (c *setTitleCommand) Unexecute() {
-	c.doc.SetTitle(c.oldTitle)
+	c.doc.SetTitle(c.OldTitle)
 }
 
 func (c *setTitleCommand) Merge(next Command) bool {
 	nextCmd, ok := next.(*setTitleCommand)
 	if ok {
-		c.newTitle = nextCmd.newTitle
+		c.NewTitle = nextCmd.NewTitle
 		return true
 	}
 	return false

@@ -30,10 +30,6 @@ func (p *paragraph) ToString() string {
 	return fmt.Sprintf("Paragraph: %s", p.text)
 }
 
-func (p *paragraph) GetItemType() string {
-	return "paragraph"
-}
-
 func (p *paragraph) GetText() string {
 	return p.text
 }
