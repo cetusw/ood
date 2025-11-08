@@ -30,6 +30,7 @@ func paintPicture(painter shapedrawinglib.CanvasPainter) {
 func paintPictureOnCanvas() {
 	fmt.Println("Painting with old graphics library...")
 	canvas := graphicslib.NewCanvas()
+	canvas.SetColor(0xFF0000FF)
 	painter := shapedrawinglib.NewCanvasPainter(canvas)
 	paintPicture(painter)
 }
@@ -38,6 +39,7 @@ func paintPictureOnModernGraphicsRenderer() {
 	fmt.Println("Painting with modern graphics library...")
 	renderer := moderngraphicslib.NewModernGraphicsRenderer(os.Stdout)
 	a := adapter.NewModernRendererAdapter(renderer)
+	a.SetColor(0xFF0000FF)
 
 	renderer.BeginDraw()
 	defer renderer.EndDraw()

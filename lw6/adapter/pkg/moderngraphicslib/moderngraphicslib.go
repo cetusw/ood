@@ -23,18 +23,22 @@ func (r *ModernGraphicsRenderer) BeginDraw() {
 	r.drawing = true
 }
 
-func (r *ModernGraphicsRenderer) DrawLine(start, end model.Point) {
+func (r *ModernGraphicsRenderer) DrawLine(start model.Point, end model.Point, color model.Color) {
 	if !r.drawing {
 		panic("DrawLine is allowed between BeginDraw()/EndDraw() only")
 	}
 
 	fmt.Fprintf(
 		r.out,
-		"  <line fromX=\"%d\" fromY=\"%d\" toX=\"%d\" toY=\"%d\"/>\n",
+		"  <line fromX=\"%d\" fromY=\"%d\" toX=\"%d\" toY=\"%d\">\n    <color r=\"%.2f\" g=\"%.2f\" b=\"%.2f\" a=\"%.2f\"/>\n  </line>\n",
 		start.X,
 		start.Y,
 		end.X,
 		end.Y,
+		color.R,
+		color.G,
+		color.B,
+		color.A,
 	)
 }
 
