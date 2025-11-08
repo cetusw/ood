@@ -1,7 +1,6 @@
 package main
 
 import (
-	"adapter/pkg/model"
 	"bufio"
 	"fmt"
 	"os"
@@ -9,6 +8,7 @@ import (
 
 	"adapter/pkg/adapter"
 	"adapter/pkg/graphicslib"
+	"adapter/pkg/model"
 	"adapter/pkg/moderngraphicslib"
 	"adapter/pkg/shapedrawinglib"
 )

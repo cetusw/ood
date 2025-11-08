@@ -1,9 +1,10 @@
 package moderngraphicslib
 
 import (
-	"adapter/pkg/model"
 	"fmt"
 	"io"
+
+	"adapter/pkg/model"
 )
 
 type ModernGraphicsRenderer struct {
@@ -17,7 +18,8 @@ func NewModernGraphicsRenderer(out io.Writer) *ModernGraphicsRenderer {
 
 func (r *ModernGraphicsRenderer) BeginDraw() {
 	if r.drawing {
-		panic("Drawing has already begun")
+		fmt.Println("Drawing has already begun")
+		return
 	}
 	fmt.Fprintln(r.out, "<draw>")
 	r.drawing = true
@@ -25,7 +27,8 @@ func (r *ModernGraphicsRenderer) BeginDraw() {
 
 func (r *ModernGraphicsRenderer) DrawLine(start model.Point, end model.Point, color model.Color) {
 	if !r.drawing {
-		panic("DrawLine is allowed between BeginDraw()/EndDraw() only")
+		fmt.Println("DrawLine is allowed between BeginDraw()/EndDraw() only")
+		return
 	}
 
 	fmt.Fprintf(
@@ -44,7 +47,8 @@ func (r *ModernGraphicsRenderer) DrawLine(start model.Point, end model.Point, co
 
 func (r *ModernGraphicsRenderer) EndDraw() {
 	if !r.drawing {
-		panic("Drawing has not been started")
+		fmt.Println("Drawing has not been started")
+		return
 	}
 	fmt.Fprintln(r.out, "</draw>")
 	r.drawing = false
