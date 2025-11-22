@@ -3,13 +3,12 @@ package shapes
 import (
 	"slides/pkg/canvas"
 	"slides/pkg/model"
-	"slides/pkg/style"
 )
 
 type ellipse struct {
 	baseShape
-	lineStyle style.Style
-	fillStyle style.Style
+	lineStyle Style
+	fillStyle Style
 	center    model.Point
 	radius    model.Radius
 }
@@ -38,6 +37,26 @@ func NewEllipse(center model.Point, radius model.Radius) Shape {
 	return e
 }
 
+func (e *ellipse) Clone() Shape {
+	newEllipse := &ellipse{
+		baseShape: baseShape{
+			frame: e.frame,
+			color: e.color,
+		},
+		center: e.center,
+		radius: e.radius,
+	}
+
+	if e.lineStyle != nil {
+		newEllipse.lineStyle = e.lineStyle.Clone()
+	}
+	if e.fillStyle != nil {
+		newEllipse.fillStyle = e.fillStyle.Clone()
+	}
+
+	return newEllipse
+}
+
 func (e *ellipse) Draw(canvas canvas.Canvas) {
 	radius := model.Radius{
 		X: e.frame.Width / 2,
@@ -59,16 +78,16 @@ func (e *ellipse) SetFrame(frame model.Frame) {
 	e.frame = frame
 }
 
-func (e *ellipse) GetLineStyle() style.Style {
+func (e *ellipse) GetLineStyle() Style {
 	return e.lineStyle
 }
-func (e *ellipse) GetFillStyle() style.Style {
+func (e *ellipse) GetFillStyle() Style {
 	return e.fillStyle
 }
 
-func (e *ellipse) SetLineStyle(s style.Style) {
+func (e *ellipse) SetLineStyle(s Style) {
 	e.lineStyle = s
 }
-func (e *ellipse) SetFillStyle(s style.Style) {
+func (e *ellipse) SetFillStyle(s Style) {
 	e.fillStyle = s
 }

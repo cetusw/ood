@@ -3,15 +3,15 @@ package shapes
 import (
 	"slides/pkg/canvas"
 	"slides/pkg/model"
-	"slides/pkg/style"
 )
 
 type Shape interface {
 	Draw(canvas canvas.Canvas)
 	GetFrame() model.Frame
-	GetLineStyle() style.Style
-	GetFillStyle() style.Style
+	GetLineStyle() Style
+	GetFillStyle() Style
 	SetFrame(model.Frame)
-	SetLineStyle(style.Style)
-	SetFillStyle(style.Style)
+	SetLineStyle(Style)
+	SetFillStyle(Style)
+	Clone() Shape
 }

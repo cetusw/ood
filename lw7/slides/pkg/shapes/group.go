@@ -4,7 +4,6 @@ import (
 	"math"
 	"slides/pkg/canvas"
 	"slides/pkg/model"
-	"slides/pkg/style"
 )
 
 type Group struct {
@@ -13,6 +12,16 @@ type Group struct {
 
 func NewGroup() *Group {
 	return &Group{shapes: make([]Shape, 0)}
+}
+
+func (g *Group) Clone() Shape {
+	newGroup := NewGroup()
+
+	for _, s := range g.shapes {
+		newGroup.AddShape(s.Clone())
+	}
+
+	return newGroup
 }
 
 func (g *Group) AddShape(s Shape) {
@@ -74,9 +83,9 @@ func (g *Group) SetFrame(frame model.Frame) {
 	}
 }
 
-func (g *Group) GetFillStyle() style.Style {
+func (g *Group) GetFillStyle() Style {
 	if len(g.shapes) == 0 {
-		return style.NewStyle(false, model.Undefined)
+		return NewStyle(false, model.Undefined)
 	}
 
 	firstStyle := g.shapes[0].GetFillStyle()
@@ -97,10 +106,10 @@ func (g *Group) GetFillStyle() style.Style {
 		}
 	}
 
-	return style.NewStyle(commonEnabled, commonColor)
+	return NewStyle(commonEnabled, commonColor)
 }
 
-func (g *Group) SetFillStyle(fillStyle style.Style) {
+func (g *Group) SetFillStyle(fillStyle Style) {
 	for _, s := range g.shapes {
 		currentStyle := s.GetFillStyle()
 
@@ -113,9 +122,9 @@ func (g *Group) SetFillStyle(fillStyle style.Style) {
 	}
 }
 
-func (g *Group) GetLineStyle() style.Style {
+func (g *Group) GetLineStyle() Style {
 	if len(g.shapes) == 0 {
-		return style.NewStyle(false, model.Undefined)
+		return NewStyle(false, model.Undefined)
 	}
 
 	firstStyle := g.shapes[0].GetLineStyle()
@@ -136,10 +145,10 @@ func (g *Group) GetLineStyle() style.Style {
 		}
 	}
 
-	return style.NewStyle(commonEnabled, commonColor)
+	return NewStyle(commonEnabled, commonColor)
 }
 
-func (g *Group) SetLineStyle(lineStyle style.Style) {
+func (g *Group) SetLineStyle(lineStyle Style) {
 	for _, s := range g.shapes {
 		currentStyle := s.GetLineStyle()
 

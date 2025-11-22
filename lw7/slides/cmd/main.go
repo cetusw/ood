@@ -7,21 +7,20 @@ import (
 	"slides/pkg/model"
 	"slides/pkg/shapes"
 	"slides/pkg/slide"
-	"slides/pkg/style"
 )
 
 func main() {
 	cnv := canvas.NewPngCanvas(800, 600)
 
 	ground := createRect(0, 0, 800, 150, model.Green)
-	ground.SetLineStyle(style.NewStyle(false, model.Undefined))
+	ground.SetLineStyle(shapes.NewStyle(false, model.Undefined))
 
 	sky := createRect(0, 150, 800, 450, model.Blue)
-	sky.SetLineStyle(style.NewStyle(false, model.Undefined))
+	sky.SetLineStyle(shapes.NewStyle(false, model.Undefined))
 
 	sun := shapes.NewEllipse(model.Point{X: 700, Y: 500}, model.Radius{X: 40, Y: 40})
-	sun.SetFillStyle(style.NewStyle(true, model.Yellow))
-	sun.SetLineStyle(style.NewStyle(false, model.Undefined))
+	sun.SetFillStyle(shapes.NewStyle(true, model.Yellow))
+	sun.SetLineStyle(shapes.NewStyle(false, model.Undefined))
 
 	houseGroup := shapes.NewGroup()
 	houseBody := createRect(100, 150, 200, 150, model.Red)
@@ -30,10 +29,10 @@ func main() {
 		{X: 80, Y: 300},
 		{X: 320, Y: 300},
 		{X: 200, Y: 420},
-	}, style.NewStyle(true, model.Black), style.NewStyle(true, model.Black))
+	}, shapes.NewStyle(true, model.Black), shapes.NewStyle(true, model.Black))
 
 	window := createRect(160, 200, 80, 60, model.Blue)
-	window.SetLineStyle(style.NewStyle(true, model.Yellow))
+	window.SetLineStyle(shapes.NewStyle(true, model.Yellow))
 
 	houseGroup.AddShape(houseBody)
 	houseGroup.AddShape(roof)
@@ -47,8 +46,8 @@ func main() {
 
 	trunk := createRect(550, 150, 40, 120, model.Black)
 	leaves := shapes.NewEllipse(model.Point{X: 610, Y: 320}, model.Radius{X: 40, Y: 40})
-	leaves.SetFillStyle(style.NewStyle(true, model.Green))
-	leaves.SetLineStyle(style.NewStyle(true, model.Black))
+	leaves.SetFillStyle(shapes.NewStyle(true, model.Green))
+	leaves.SetLineStyle(shapes.NewStyle(true, model.Black))
 
 	treeGroup.AddShape(trunk)
 	treeGroup.AddShape(leaves)
@@ -78,8 +77,8 @@ func createRect(x, y, w, h float64, fillColor model.Color) shapes.Shape {
 	p3 := model.Point{X: x + w, Y: y + h}
 	p4 := model.Point{X: x, Y: y + h}
 
-	lineStyle := style.NewStyle(true, model.Undefined)
-	fillStyle := style.NewStyle(true, fillColor)
+	lineStyle := shapes.NewStyle(true, model.Undefined)
+	fillStyle := shapes.NewStyle(true, fillColor)
 
 	return shapes.NewPolygon([]model.Point{p1, p2, p3, p4}, lineStyle, fillStyle)
 }

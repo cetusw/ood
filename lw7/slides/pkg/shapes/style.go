@@ -1,8 +1,9 @@
-package style
+package shapes
 
 import "slides/pkg/model"
 
 type Style interface {
+	Clone() Style
 	IsEnabled() bool
 	Enable(enable bool)
 	GetColor() model.Color
@@ -18,6 +19,13 @@ func NewStyle(isEnabled bool, color model.Color) Style {
 	return &style{
 		isEnabled: isEnabled,
 		color:     color,
+	}
+}
+
+func (s *style) Clone() Style {
+	return &style{
+		isEnabled: s.isEnabled,
+		color:     s.color,
 	}
 }
 

@@ -4,17 +4,16 @@ import (
 	"math"
 	"slides/pkg/canvas"
 	"slides/pkg/model"
-	"slides/pkg/style"
 )
 
 type polygon struct {
 	baseShape
-	lineStyle style.Style
-	fillStyle style.Style
+	lineStyle Style
+	fillStyle Style
 	vertices  []model.Point
 }
 
-func NewPolygon(vertices []model.Point, lineStyle style.Style, fillStyle style.Style) Shape {
+func NewPolygon(vertices []model.Point, lineStyle Style, fillStyle Style) Shape {
 	minX, minY := math.MaxFloat64, math.MaxFloat64
 	maxX, maxY := -math.MaxFloat64, -math.MaxFloat64
 	for _, v := range vertices {
@@ -36,6 +35,28 @@ func NewPolygon(vertices []model.Point, lineStyle style.Style, fillStyle style.S
 		lineStyle: lineStyle,
 		fillStyle: fillStyle,
 	}
+}
+
+func (p *polygon) Clone() Shape {
+	newVertices := make([]model.Point, len(p.vertices))
+	copy(newVertices, p.vertices)
+
+	newPoly := &polygon{
+		baseShape: baseShape{
+			frame: p.frame,
+			color: p.color,
+		},
+		vertices: newVertices,
+	}
+
+	if p.lineStyle != nil {
+		newPoly.lineStyle = p.lineStyle.Clone()
+	}
+	if p.fillStyle != nil {
+		newPoly.fillStyle = p.fillStyle.Clone()
+	}
+
+	return newPoly
 }
 
 func (p *polygon) Draw(c canvas.Canvas) {
@@ -61,18 +82,18 @@ func (p *polygon) SetFrame(newFrame model.Frame) {
 	p.frame = newFrame
 }
 
-func (p *polygon) GetLineStyle() style.Style {
+func (p *polygon) GetLineStyle() Style {
 	return p.lineStyle
 }
 
-func (p *polygon) GetFillStyle() style.Style {
+func (p *polygon) GetFillStyle() Style {
 	return p.fillStyle
 }
 
-func (p *polygon) SetLineStyle(s style.Style) {
+func (p *polygon) SetLineStyle(s Style) {
 	p.lineStyle = s
 }
 
-func (p *polygon) SetFillStyle(s style.Style) {
+func (p *polygon) SetFillStyle(s Style) {
 	p.fillStyle = s
 }
