@@ -66,6 +66,44 @@ func TestNaiveMultiCoin_CoinsMoreThanBalls(t *testing.T) {
 	}
 }
 
+func TestNaive_RefillFromSoldOutWithNoCoins(t *testing.T) {
+	buf := new(bytes.Buffer)
+	m := NewGumballMachine(0, buf)
+	m.Refill(5)
+
+	if m.ballsCount != 5 {
+		t.Errorf("Expected 5 balls, got %d", m.ballsCount)
+	}
+	assertState(t, m, NoQuarter)
+}
+
+func TestNaive_RefillFromSoldOutWithCoins(t *testing.T) {
+	buf := new(bytes.Buffer)
+	m := NewGumballMachine(0, buf)
+
+	m.InsertQuarter()
+	if m.coinsCount != 1 {
+		t.Errorf("Coin count should be 1")
+	}
+
+	m.Refill(5)
+
+	if m.ballsCount != 5 {
+		t.Errorf("Expected 5 balls, got %d", m.ballsCount)
+	}
+	assertState(t, m, HasQuarter)
+}
+
+func TestNaive_RefillIncrements(t *testing.T) {
+	buf := new(bytes.Buffer)
+	m := NewGumballMachine(5, buf)
+	m.Refill(5)
+
+	if m.ballsCount != 10 {
+		t.Errorf("Expected 10 balls (5+5), got %d", m.ballsCount)
+	}
+}
+
 func assertOutput(t *testing.T, buffer *bytes.Buffer, expectedPart string) {
 	t.Helper()
 	got := buffer.String()

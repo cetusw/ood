@@ -81,13 +81,21 @@ func (m *GumballMachine) TurnCrank() {
 }
 
 func (m *GumballMachine) Refill(numBalls uint) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	if m.currentState == m.soldState {
+		fmt.Fprintln(m.writer, "Cannot refill while dispensing a gumball")
+		return
+	}
+
 	m.ballsCount += numBalls
 	if m.currentState == m.soldOutState {
 		if m.coinsCount > 0 {
 			m.currentState = m.hasQuarterState
-			return
+		} else {
+			m.currentState = m.noQuarterState
 		}
-		m.currentState = m.noQuarterState
 	}
 }
 
@@ -106,6 +114,10 @@ Go-enabled Standing Gumball Model #2025
 Inventory: %d gumball%s
 Machine is %s
 `, m.ballsCount, suffix, m.currentState.String())
+}
+
+func (m *GumballMachine) GetBallCount() uint {
+	return m.ballsCount
 }
 
 func (m *GumballMachine) releaseBall() {

@@ -115,11 +115,19 @@ func (m *GumballMachine) TurnCrank() {
 }
 
 func (m *GumballMachine) Refill(numBalls int) {
-	m.ballsCount = numBalls
-	if numBalls > 0 {
-		m.state = NoQuarter
-	} else {
-		m.state = SoldOut
+	if m.state == Sold {
+		fmt.Fprintln(m.writer, "Cannot refill while dispensing a gumball")
+		return
+	}
+
+	m.ballsCount += numBalls
+
+	if m.state == SoldOut && m.ballsCount > 0 {
+		if m.coinsCount > 0 {
+			m.state = HasQuarter
+		} else {
+			m.state = NoQuarter
+		}
 	}
 }
 
