@@ -68,13 +68,14 @@ func Test_HasQuarter_InsertQuarter(t *testing.T) {
 
 	m.InsertQuarter()
 
-	assertOutput(t, buf, "You can't insert another quarter")
+	assertOutput(t, buf, "You inserted a quarter")
 	assertState(t, m, m.hasQuarterState)
 }
 
 func Test_HasQuarter_EjectQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
+	m.coinsCount = 1
 	m.setState(m.hasQuarterState)
 	buf.Reset()
 
@@ -87,6 +88,7 @@ func Test_HasQuarter_EjectQuarter(t *testing.T) {
 func Test_HasQuarter_TurnCrank(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
+	m.coinsCount = 1
 	m.setState(m.hasQuarterState)
 	buf.Reset()
 
@@ -130,6 +132,7 @@ func Test_SoldState_InsertQuarter(t *testing.T) {
 func Test_SoldState_EjectQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
+	m.coinsCount = 1
 	m.setState(m.soldState)
 	buf.Reset()
 
@@ -154,6 +157,7 @@ func Test_SoldState_TurnCrank(t *testing.T) {
 func Test_SoldState_Dispense_WithGumballs(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(2, buf)
+	m.coinsCount = 1
 	m.setState(m.soldState)
 	buf.Reset()
 
@@ -207,7 +211,7 @@ func Test_SoldOut_EjectQuarter(t *testing.T) {
 
 	m.EjectQuarter()
 
-	assertOutput(t, buf, "You can't eject, you haven't inserted a quarter yet")
+	assertOutput(t, buf, "You haven't inserted a quarter")
 	assertState(t, m, m.soldOutState)
 }
 

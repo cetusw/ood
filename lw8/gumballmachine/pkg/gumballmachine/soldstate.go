@@ -19,13 +19,18 @@ func (s *soldState) turnCrank() {
 }
 
 func (s *soldState) dispense() {
+	s.machine.coinsCount--
 	s.machine.releaseBall()
 	if s.machine.ballsCount <= 0 {
 		fmt.Fprintln(s.machine.writer, "Oops, out of gumballs")
 		s.machine.setState(s.machine.soldOutState)
 		return
 	}
-	s.machine.setState(s.machine.noQuarterState)
+	if s.machine.coinsCount <= 0 {
+		s.machine.setState(s.machine.noQuarterState)
+		return
+	}
+	s.machine.setState(s.machine.hasQuarterState)
 }
 
 func (s *soldState) String() string { return "delivering a gumball" }

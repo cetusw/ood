@@ -8,6 +8,7 @@ type noQuarterState struct {
 
 func (s *noQuarterState) insertQuarter() {
 	fmt.Fprintln(s.machine.writer, "You inserted a quarter")
+	s.machine.coinsCount++
 	s.machine.setState(s.machine.hasQuarterState)
 }
 func (s *noQuarterState) ejectQuarter() {

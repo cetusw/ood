@@ -6,6 +6,10 @@ import (
 	"sync"
 )
 
+const (
+	maxCoinsCount = 5
+)
+
 type state interface {
 	insertQuarter()
 	ejectQuarter()
@@ -17,7 +21,8 @@ type state interface {
 type GumballMachine struct {
 	mu sync.Mutex
 
-	ballsCount   int
+	ballsCount   uint
+	coinsCount   uint
 	currentState state
 
 	soldOutState    state
@@ -28,7 +33,7 @@ type GumballMachine struct {
 	writer io.Writer
 }
 
-func NewGumballMachine(numBalls int, w io.Writer) *GumballMachine {
+func NewGumballMachine(numBalls uint, w io.Writer) *GumballMachine {
 	if w == nil {
 		w = io.Discard
 	}
@@ -55,7 +60,11 @@ func NewGumballMachine(numBalls int, w io.Writer) *GumballMachine {
 func (m *GumballMachine) InsertQuarter() {
 	m.mu.Lock()
 	defer m.mu.Unlock()
-	m.currentState.insertQuarter()
+	if m.coinsCount < maxCoinsCount {
+		m.currentState.insertQuarter()
+	} else {
+		fmt.Fprintln(m.writer, "The maximum number of coins has been reached")
+	}
 }
 
 func (m *GumballMachine) EjectQuarter() {
@@ -69,6 +78,17 @@ func (m *GumballMachine) TurnCrank() {
 	defer m.mu.Unlock()
 	m.currentState.turnCrank()
 	m.currentState.dispense()
+}
+
+func (m *GumballMachine) Refill(numBalls uint) {
+	m.ballsCount += numBalls
+	if m.currentState == m.soldOutState {
+		if m.coinsCount > 0 {
+			m.currentState = m.hasQuarterState
+			return
+		}
+		m.currentState = m.noQuarterState
+	}
 }
 
 func (m *GumballMachine) String() string {

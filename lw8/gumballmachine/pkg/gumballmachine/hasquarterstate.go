@@ -7,11 +7,14 @@ type hasQuarterState struct {
 }
 
 func (s *hasQuarterState) insertQuarter() {
-	fmt.Fprintln(s.machine.writer, "You can't insert another quarter")
+	s.machine.coinsCount++
+	fmt.Fprintln(s.machine.writer, "You inserted a quarter")
+
 }
 func (s *hasQuarterState) ejectQuarter() {
-	fmt.Fprintln(s.machine.writer, "Quarter returned")
+	s.machine.coinsCount = 0
 	s.machine.setState(s.machine.noQuarterState)
+	fmt.Fprintln(s.machine.writer, "Quarter returned")
 }
 func (s *hasQuarterState) turnCrank() {
 	fmt.Fprintln(s.machine.writer, "You turned...")
