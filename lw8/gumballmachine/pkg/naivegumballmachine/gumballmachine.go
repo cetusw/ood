@@ -143,15 +143,18 @@ func (m *GumballMachine) dispense() {
 		fmt.Fprintln(m.writer, "A gumball comes rolling out the slot")
 		m.ballsCount--
 		m.coinsCount--
+
 		if m.ballsCount == 0 {
 			fmt.Fprintln(m.writer, "Oops, out of gumballs")
 			m.state = SoldOut
 			return
 		}
+
 		if m.coinsCount == 0 {
 			m.state = NoQuarter
+		} else {
+			m.state = HasQuarter
 		}
-		m.state = HasQuarter
 	case NoQuarter:
 		fmt.Fprintln(m.writer, "You need to pay first")
 	case SoldOut, HasQuarter:

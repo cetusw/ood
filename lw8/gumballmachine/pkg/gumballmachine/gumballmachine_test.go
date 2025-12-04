@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_NoQuarter_InsertQuarter(t *testing.T) {
+func TestGumBallMachine_NoQuarterStateInsertQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.noQuarterState)
@@ -18,7 +18,7 @@ func Test_NoQuarter_InsertQuarter(t *testing.T) {
 	assertState(t, m, m.hasQuarterState)
 }
 
-func Test_NoQuarter_EjectQuarter(t *testing.T) {
+func TestGumBallMachine_NoQuarterStateEjectQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.noQuarterState)
@@ -30,7 +30,7 @@ func Test_NoQuarter_EjectQuarter(t *testing.T) {
 	assertState(t, m, m.noQuarterState)
 }
 
-func Test_NoQuarter_TurnCrank(t *testing.T) {
+func TestGumBallMachine_NoQuarterStateTurnCrank(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.noQuarterState)
@@ -48,7 +48,7 @@ func Test_NoQuarter_TurnCrank(t *testing.T) {
 	assertState(t, m, m.noQuarterState)
 }
 
-func Test_NoQuarter_Dispense(t *testing.T) {
+func TestGumBallMachine_NoQuarterStateDispense(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.noQuarterState)
@@ -60,7 +60,7 @@ func Test_NoQuarter_Dispense(t *testing.T) {
 	assertState(t, m, m.noQuarterState)
 }
 
-func Test_HasQuarter_InsertQuarter(t *testing.T) {
+func TestGumBallMachine_HasQuarterStateInsertQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.hasQuarterState)
@@ -72,7 +72,7 @@ func Test_HasQuarter_InsertQuarter(t *testing.T) {
 	assertState(t, m, m.hasQuarterState)
 }
 
-func Test_HasQuarter_EjectQuarter(t *testing.T) {
+func TestGumBallMachine_HasQuarterStateEjectQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.coinsCount = 1
@@ -85,7 +85,7 @@ func Test_HasQuarter_EjectQuarter(t *testing.T) {
 	assertState(t, m, m.noQuarterState)
 }
 
-func Test_HasQuarter_TurnCrank(t *testing.T) {
+func TestGumBallMachine_HasQuarterStateTurnCrank(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.coinsCount = 1
@@ -105,7 +105,7 @@ func Test_HasQuarter_TurnCrank(t *testing.T) {
 	assertState(t, m, m.noQuarterState)
 }
 
-func Test_HasQuarter_Dispense(t *testing.T) {
+func TestGumBallMachine_HasQuarterStateDispense(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.hasQuarterState)
@@ -117,7 +117,7 @@ func Test_HasQuarter_Dispense(t *testing.T) {
 	assertState(t, m, m.hasQuarterState)
 }
 
-func Test_SoldState_InsertQuarter(t *testing.T) {
+func TestGumBallMachine_SoldStateInsertQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.soldState)
@@ -129,7 +129,7 @@ func Test_SoldState_InsertQuarter(t *testing.T) {
 	assertState(t, m, m.soldState)
 }
 
-func Test_SoldState_EjectQuarter(t *testing.T) {
+func TestGumBallMachine_SoldStateEjectQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.coinsCount = 1
@@ -142,7 +142,7 @@ func Test_SoldState_EjectQuarter(t *testing.T) {
 	assertState(t, m, m.soldState)
 }
 
-func Test_SoldState_TurnCrank(t *testing.T) {
+func TestGumBallMachine_SoldStateTurnCrank(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(5, buf)
 	m.setState(m.soldState)
@@ -154,7 +154,7 @@ func Test_SoldState_TurnCrank(t *testing.T) {
 	assertState(t, m, m.soldState)
 }
 
-func Test_SoldState_Dispense_WithGumballs(t *testing.T) {
+func TestGumBallMachine_SoldStateDispenseWithGumballs(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(2, buf)
 	m.coinsCount = 1
@@ -173,7 +173,7 @@ func Test_SoldState_Dispense_WithGumballs(t *testing.T) {
 	}
 }
 
-func Test_SoldState_Dispense_LastGumball(t *testing.T) {
+func TestGumBallMachine_SoldStateDispenseLastGumball(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(1, buf)
 	m.setState(m.soldState)
@@ -191,7 +191,7 @@ func Test_SoldState_Dispense_LastGumball(t *testing.T) {
 	}
 }
 
-func Test_SoldOut_InsertQuarter(t *testing.T) {
+func TestGumBallMachine_SoldOutStateInsertQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(0, buf)
 	m.setState(m.soldOutState)
@@ -203,7 +203,7 @@ func Test_SoldOut_InsertQuarter(t *testing.T) {
 	assertState(t, m, m.soldOutState)
 }
 
-func Test_SoldOut_EjectQuarter(t *testing.T) {
+func TestGumBallMachine_SoldOutStateEjectQuarter(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(0, buf)
 	m.setState(m.soldOutState)
@@ -215,7 +215,7 @@ func Test_SoldOut_EjectQuarter(t *testing.T) {
 	assertState(t, m, m.soldOutState)
 }
 
-func Test_SoldOut_TurnCrank(t *testing.T) {
+func TestGumBallMachine_SoldOutStateTurnCrank(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(0, buf)
 	m.setState(m.soldOutState)
@@ -233,7 +233,7 @@ func Test_SoldOut_TurnCrank(t *testing.T) {
 	assertState(t, m, m.soldOutState)
 }
 
-func Test_SoldOut_Dispense(t *testing.T) {
+func TestGumBallMachine_SoldOutStateDispense(t *testing.T) {
 	buf := new(bytes.Buffer)
 	m := NewGumballMachine(0, buf)
 	m.setState(m.soldOutState)
