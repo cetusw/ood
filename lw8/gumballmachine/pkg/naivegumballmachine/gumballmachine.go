@@ -46,15 +46,10 @@ func NewGumballMachine(count int, w io.Writer) *GumballMachine {
 		w = io.Discard
 	}
 
-	initialState := SoldOut
-	if count > 0 {
-		initialState = NoQuarter
-	}
-
 	return &GumballMachine{
 		ballsCount: count,
 		coinsCount: 0,
-		state:      initialState,
+		state:      NoQuarter,
 		writer:     w,
 	}
 }

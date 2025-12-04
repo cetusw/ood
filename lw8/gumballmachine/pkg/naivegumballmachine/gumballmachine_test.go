@@ -83,7 +83,7 @@ func TestNaive_RefillFromSoldOutWithCoins(t *testing.T) {
 
 	m.InsertQuarter()
 	if m.coinsCount != 1 {
-		t.Errorf("Coin count should be 1")
+		t.Errorf("Expected 1 coin, got %d", m.coinsCount)
 	}
 
 	m.Refill(5)
