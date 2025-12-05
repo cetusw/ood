@@ -3,7 +3,6 @@ package gumballmachine
 import (
 	"fmt"
 	"io"
-	"sync"
 )
 
 const (
@@ -19,8 +18,6 @@ type state interface {
 }
 
 type GumballMachine struct {
-	mu sync.Mutex
-
 	ballsCount   uint
 	coinsCount   uint
 	currentState state
@@ -58,8 +55,6 @@ func NewGumballMachine(numBalls uint, w io.Writer) *GumballMachine {
 }
 
 func (m *GumballMachine) InsertQuarter() {
-	m.mu.Lock()
-	defer m.mu.Unlock()
 	if m.coinsCount < maxCoinsCount {
 		m.currentState.insertQuarter()
 	} else {
@@ -68,22 +63,15 @@ func (m *GumballMachine) InsertQuarter() {
 }
 
 func (m *GumballMachine) EjectQuarter() {
-	m.mu.Lock()
-	defer m.mu.Unlock()
 	m.currentState.ejectQuarter()
 }
 
 func (m *GumballMachine) TurnCrank() {
-	m.mu.Lock()
-	defer m.mu.Unlock()
 	m.currentState.turnCrank()
 	m.currentState.dispense()
 }
 
 func (m *GumballMachine) Refill(numBalls uint) {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-
 	if m.currentState == m.soldState {
 		fmt.Fprintln(m.writer, "Cannot refill while dispensing a gumball")
 		return
@@ -100,9 +88,6 @@ func (m *GumballMachine) Refill(numBalls uint) {
 }
 
 func (m *GumballMachine) String() string {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-
 	suffix := "s"
 	if m.ballsCount == 1 {
 		suffix = ""
