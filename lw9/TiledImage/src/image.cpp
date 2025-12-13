@@ -1,8 +1,8 @@
 #include "image.h"
 #include <algorithm>
+#include <fstream>
 #include <sstream>
 #include <stdexcept>
-#include <fstream>
 
 Image::Image(const Size size, const Color color)
 	: m_size(size)
@@ -15,7 +15,7 @@ Image::Image(const Size size, const Color color)
 	m_tilesX = (size.width + Tile::SIZE - 1) / Tile::SIZE;
 	m_tilesY = (size.height + Tile::SIZE - 1) / Tile::SIZE;
 
-	const CoW singleTile{ Tile(color)};
+	const CoW singleTile{ Tile(color) };
 	m_tiles.assign(m_tilesX * m_tilesY, singleTile);
 }
 
@@ -57,7 +57,8 @@ void Image::SetPixel(const Point p, const Color color)
 void Image::SavePPM(const std::string& filename) const
 {
 	std::ofstream out(filename);
-	if (!out) return;
+	if (!out)
+		return;
 
 	out << "P3\n";
 	out << m_size.width << " " << m_size.height << "\n";
@@ -69,8 +70,8 @@ void Image::SavePPM(const std::string& filename) const
 		{
 			const Color c = GetPixel({ x, y });
 			out << static_cast<int>(GetR(c)) << " "
-			    << static_cast<int>(GetG(c)) << " "
-			    << static_cast<int>(GetB(c)) << " ";
+				<< static_cast<int>(GetG(c)) << " "
+				<< static_cast<int>(GetB(c)) << " ";
 		}
 		out << "\n";
 	}

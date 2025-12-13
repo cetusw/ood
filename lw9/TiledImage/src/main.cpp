@@ -44,6 +44,7 @@ int main()
 	DrawCircle(img, { 67, 25 }, 3, smokeColor);
 	DrawCircle(img, { 72, 20 }, 4, smokeColor);
 	DrawCircle(img, { 78, 15 }, 6, smokeColor);
+	FillCircle(img, { 78, 15 }, 6, smokeColor);
 
 	const std::string filename = "../house.ppm";
 	img.SavePPM(filename);
