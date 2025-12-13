@@ -12,7 +12,7 @@ public:
 
 	[[nodiscard]] Size GetSize() const noexcept;
 
-	Color GetPixel(Point p) const noexcept;
+	[[nodiscard]] Color GetPixel(Point p) const noexcept;
 
 	void SetPixel(Point p, Color color);
 

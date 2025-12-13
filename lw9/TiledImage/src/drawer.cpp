@@ -9,7 +9,7 @@ int GetSign(const int value)
 	return (0 < value) - (value < 0);
 }
 
-void DrawShallowLine(Image& image, const Point from, const Point to, const Color color)
+void DrawGentleLine(Image& image, const Point from, const Point to, const Color color)
 {
 	const int dx = std::abs(to.x - from.x);
 	const int dy = std::abs(to.y - from.y);
@@ -91,7 +91,7 @@ void DrawLine(Image& image, Point from, Point to, const Color color)
 		{
 			std::swap(from, to);
 		}
-		DrawShallowLine(image, from, to, color);
+		DrawGentleLine(image, from, to, color);
 	}
 }
 
